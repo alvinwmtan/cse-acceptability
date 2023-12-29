@@ -1,0 +1,43 @@
+# Methods
+
+## Participants
+83 participants aged 18--25 (49 male, 33 female, 1 other) participated in the main study. 
+All participants were native CSE speakers. 
+As their MT, 62 spoke Chinese, 18 spoke Malay, and 3 spoke another language (English or Tamil). 
+Only the Chinese- and Malay-speaking participants were used for the remainder of the analyses.
+
+Out of the 80 included participants, 73 either attended, were attending, or were about to attend university, of whom 58 were Chinese-speaking and 14 were Malay-speaking. 
+These proportions were not significantly different at $\alpha = .01$ ($\chi^2 = 3.855$, $p = .050$). 
+Both the MT and education level distributions were similar to those of the overall 18--25 population in Singapore<!--~\cite{noauthor_singapore_nodate}-->.
+
+40 participants indicated that they could speak at least one variety other than English and their MT. 
+Of these, 23 of the Chinese speakers could speak another Chinese variety (Cantonese, Hokkien, Teochew, or Henghua), and 8 of the Chinese speakers could speak Malay. 
+3 Malay speakers could also speak Mandarin. 
+These data were not excluded as these multilingual speakers uniformly rated themselves as being more proficient and having more formal training in their MT than their third language. 
+
+## Task
+Participants completed a questionnaire online using Qualtrics, in which they evaluated sentences on a 1--5 scale based on their naturalness (see Section<!--~\ref{sec:qn_scale}-->). 
+They were told not to consider grammar rules they may have learnt in school, but to focus on their sense of what would be appropriate in ordinary relaxed conversation. 
+Participants were also reminded that they would not be evaluated on the basis of their responses.
+
+The first block comprised 10 practice sentences, including 5 sentences in SSE and 5 in CSE. 
+This allowed participants to become familiar with the task, but also primed them to interpret sentences in a CSE context.
+
+Subsequently, participants completed three blocks of 24 questions each. 
+Each block contained 12 copula test sentences, 10 past tense test sentences, and 2 benchmark sentences.[^02-01] 
+In particular, the 12 copula test sentences included 4 sentences for each complement type (NP, AP, PP); these all involved a 3\textsc{sg} subject to control for the form of the copula (i.e. \textit{is}). 
+The 10 past tense test sentences included 2 sentences of each past tense type (suppletion, vowel change, [t]/[d] affixation, [ɪd] affixation, vowel change + [t]/[d] appending); they also all included a past temporal marker (e.g. _yesterday_).
+The test sentences had both SSE and CSE versions (i.e., with and without the copula, or with and without past tense marking respectively), such that each participant would be presented only one version of each test sentences.
+Participants rated an equal number of SSE and CSE sentences, and which sentences were presented in CSE was counterbalanced across participants. 
+One low and one high benchmark sentence were also included to verify that participants understood the task. 
+The full list of sentences can be found in Section<!--~\ref{sec:qn_sentences}-->.
+
+[^02-01]: The copula and past tense test sentences mutually served as fillers, and thus no additional filler sentences were included.
+No participant reported identifying both classes of test sentences, suggesting that this method of blinding was sufficient.
+
+<!-- Participants were randomly assigned to either the plain or particle condition. In the latter, a particle or modifier was incorporated into each CSE sentence, while none were used in the former. -->
+
+After completing the three test blocks, participants filled in a set of demographic questions, including information about age, gender, education, MT language proficiency, and duration of living in Singapore. 
+The full list of demographic questions can be found in Appendix<!--~\ref{ap:2-demographics}-->.
+
+The study was approved by the University of Oxford Central University Research Ethics Committee (reference number R65019/RE001).

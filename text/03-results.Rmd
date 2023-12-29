@@ -1,0 +1,408 @@
+# Results
+
+## Copular constructions
+
+```{r data, include=F}
+data_df <- read_csv(here("data", "data.csv")) #, locale = locale(encoding = "UTF-16LE"))
+questions <- read_csv(here("data", "questions.csv"))
+
+data_tib <- data_df |> 
+  filter(Finished == "TRUE") |> 
+  pivot_longer(cols = Q3_1:Q11_24, names_to = "question") |> 
+  filter(!is.na(value)) |> 
+  left_join(questions, by = "question") |> 
+  mutate(q_type = q_type |> as.factor(),
+         lang_group = lang_group |> as.factor(),
+         value = value |> as.numeric(),
+         proficiency = Q18 |> as.numeric())
+```
+
+```{r copula}
+cop <- data_tib |> 
+  filter(lang_group != 'O',
+         test_phen == 1) |> 
+  mutate(cop_type = cop_type |> as.factor() |> 
+           fct_shift(1) |> `contrasts<-`(value = contr.sum(3) * 0.5),
+         q_type = q_type |> fct_drop() |> `contrasts<-`(value = contr.sum(2) * 0.5),
+         lang_group = lang_group |> fct_drop() |> `contrasts<-`(value = contr.sum(2) * 0.5))
+
+cop_lm <- lmer(value ~ cop_type * q_type * lang_group + 
+                 (1 | ResponseId) + (1 | s_label),
+               data = cop)
+
+cop_sum <- cop_lm |> tidy()
+```
+
+(ref:cop-plot) Distributions of ratings for copular constructions by complement type, sentence version, and language group. Black dashed lines indicate means. C: Chinese; M: Malay.
+```{r cop-plot, out.width="100%", fig.cap="(ref:cop-plot)"}
+cop_mean <- cop |> 
+  group_by(cop_type, s_variant) |> 
+  summarise(mean = mean(value),
+            sd = sd(value),
+            count = n()) |> 
+  mutate(se = sd / sqrt(count),
+         lower_ci = mean - se,
+         upper_ci = mean + se)
+
+cop_lab <- labeller(
+  s_variant = c("a" = "With copula", "b" = "Without copula"), 
+  cop_type = c(`1` = "NP", `2` = "AP", `3` = "PP"))
+
+cop_plot <- ggplot(data = cop |> mutate(cop_type = cop_type |> 
+                              fct_relevel(c("1", "2", "3")))) +
+  geom_bar(aes(x = value, fill = lang_group), stat = "count") +
+  geom_vline(aes(xintercept = mean), data = cop_mean, lty = "dashed") +
+  facet_grid(cop_type ~ s_variant, labeller = cop_lab) +
+  labs(x = "Rating", y = "Count") +
+  scale_fill_brewer(palette = "Set2", name = "MT")
+
+cop_plot
+```
+
+```{r cop_stats}
+cop_sw <- cop_lm |> compute_redres() |> shapiro.test()
+cop_emm_qt <- emmeans(cop_lm, ~ q_type) |> tidy()
+cop_emm_cqt <- emmeans(cop_lm, ~ cop_type | q_type)
+cop_con_cqt <- contrast(cop_emm_cqt, method = "pairwise") |> tidy()
+cop_emm_cqt <- cop_emm_cqt |> tidy()
+cop_emm_lg <- emmeans(cop_lm, ~ lang_group) |> tidy()
+```
+
+Participants' ratings for items involving copular constructions are shown in Figure \@ref(fig:cop-plot).
+We conducted a linear regression with rating as the outcome variable, and complement type, sentence version, and MT as fixed effects with sum contrasts, along with all interactions. 
+We also included participant and item as random effects.
+The full model specification is as follows: `rating ~ comp_type * sent_version * mt + (1 | ppt_id) + (1 | item_id)`.[^03-01]
+
+[^03-01]: A Shapiro--Wilk test revealed that residuals of the linear regression were not normally distributed ($W =$ `r cop_sw$statistic`, $p < .001$). 
+However, visual observation of the Q--Q plot suggested that the deviation was minor and only occurred near the top tail of the distribution, which was expected due to negative skew (`r skewness(cop$value)`) associated with a ceiling effect. 
+As such, linear regression remained the analysis of choice.
+```{r cop-resqq}
+cop_resqq <- plot_resqq(cop_lm)
+```
+
+Model results suggested that there was an unsurprising main effect of sentence version ($b =$ `r cop_sum |> filter(term == "q_type1") |> pull(estimate)`, $p =$ `r cop_sum |> filter(term == "q_type1") |> pull(p.value)`), with sentences including the copula having higher mean ratings (`r cop_emm_qt |> filter(q_type == 1) |> pull(estimate)` $\pm$ `r cop_emm_qt |> filter(q_type == 1) |> pull(std.error)`) than sentences without the copula (`r cop_emm_qt |> filter(q_type == 2) |> pull(estimate)` $\pm$ `r cop_emm_qt |> filter(q_type == 2) |> pull(std.error)`).[^03-02]
+
+[^03-02]: Reported values indicate estimated marginal means and their 95% confidence intervals.
+
+There was no main effect of MT ($b =$ `r cop_sum |> filter(term == "lang_group1") |> pull(estimate)`, $p =$ `r cop_sum |> filter(term == "lang_group1") |> pull(p.value)`), suggesting that mean ratings did not differ between Chinese speakers (`r cop_emm_lg |> filter(lang_group == "C") |> pull(estimate)` $\pm$ `r cop_emm_lg |> filter(lang_group == "C") |> pull(std.error)`) and Malay speakers (`r cop_emm_lg |> filter(lang_group == "M") |> pull(estimate)` $\pm$ `r cop_emm_lg |> filter(lang_group == "C") |> pull(std.error)`).
+
+However, there were interaction effects between complement type and question type, as shown in Figure \@ref(fig:cop-pairwise). 
+Post-hoc pairwise comparisons using the Tukey method revealed that there were no significant pairwise contrasts for sentences including the copula (all $p >$ `r cop_con_cqt |> filter(q_type == 1) |> pull(adj.p.value) |> min() |> floor_dec(1)`). 
+However, there were significant pairwise contrasts for sentences without the copula.
+Sentences with a PP complement (`r cop_emm_cqt |> filter(q_type == 2, cop_type == 3) |> pull(estimate)` $\pm$ `r cop_emm_cqt |> filter(q_type == 2, cop_type == 3) |> pull(std.error)`) had higher ratings than sentences with an NP complement (`r cop_emm_cqt |> filter(q_type == 2, cop_type == 1) |> pull(estimate)` $\pm$ `r cop_emm_cqt |> filter(q_type == 2, cop_type == 1) |> pull(std.error)`, $b =$ `r cop_con_cqt |> filter(q_type == 2, contrast == "2 - 3") |> pull(estimate) |> abs()`, $p =$ `r cop_con_cqt |> filter(q_type == 2, contrast == "2 - 3") |> pull(adj.p.value)`) and also had higher ratings than sentences with an AP complement (`r cop_emm_cqt |> filter(q_type == 2, cop_type == 2) |> pull(estimate)` $\pm$ `r cop_emm_cqt |> filter(q_type == 2, cop_type == 2) |> pull(std.error)`, $b =$ `r cop_con_cqt |> filter(q_type == 2, contrast == "3 - 1") |> pull(estimate) |> abs()`, $p =$ `r cop_con_cqt |> filter(q_type == 2, contrast == "3 - 1") |> pull(adj.p.value)`). 
+Sentences with an NP complement were not significantly different than sentences with an AP complement ($b =$ `r cop_con_cqt |> filter(q_type == 2, contrast == "2 - 1") |> pull(estimate) |> abs()`, $p =$ `r cop_con_cqt |> filter(q_type == 2, contrast == "2 - 1") |> pull(adj.p.value)`).
+
+(ref:cop-pw) Mean ratings for copular constructions by complement type and sentence version. \*: $p < .05$, \*\*: $p < .01$.
+```{r cop-pairwise, out.width="100%", fig.cap="(ref:cop-pw)"}
+cop_emm <- emmeans(cop_lm, ~ cop_type | q_type)
+cop_con <- contrast(cop_emm, method = "pairwise") |> 
+  as_tibble() |>
+  separate(contrast, c("g1", "g2"), " - ") |> 
+  mutate(group1 = pmin(g1, g2),
+         group2 = pmax(g1, g2),
+         p.signif = cut(p.value,
+                        breaks = c(-Inf, .0001, .001, .01, .05, .1, 1),
+                        labels = c("****", "***", "**", "*", "ns", "ns"))) |> 
+  select(-g1, -g2) |> 
+  arrange(q_type, group2) |> 
+  add_x_position(x = "cop_type", 
+                 group = "q_type", 
+                 dodge = 0.9)
+
+cop_pw <- ggplot(data = cop_mean |> mutate(cop_type = cop_type |> 
+                                             fct_relevel(c("1", "2", "3")) |> 
+                                             fct_recode("NP" = "1", 
+                                                        "AP" = "2",
+                                                        "PP" = "3"))) +
+  geom_col(aes(y = mean, x = cop_type, fill = s_variant),
+           position = position_dodge()) +
+  geom_errorbar(aes(ymin = lower_ci, ymax = upper_ci, 
+                    x = cop_type, group = s_variant),
+                width = 0.3,
+                position = position_dodge(width = 0.9)) +
+  stat_pvalue_manual(cop_con,
+                     y.position = 1.1 * max(cop_mean$mean),
+                     step.increase = 0.2,
+                     tip.length = 0.03,
+                     hide.ns = T) +
+  labs(x = "Complement type", y = "Mean rating") +
+  scale_fill_manual(name = "Sentence type",
+                    labels = c("With copula", "Without copula"),
+                    values = c("lightsalmon", "lightslateblue"))
+
+cop_pw
+```
+
+Surprisingly, there were no interaction effects involving MT. 
+There was no interaction between language and complement type ($p >$ `r cop_sum |> filter(grepl("cop_type[12]:lang_group", term)) |> pull(p.value) |> min() |> floor_dec(1)`), or language and sentence version ($p =$ `r cop_sum |> filter(grepl("q_type1:lang_group", term)) |> pull(p.value) |> min() |> floor_dec(1)`), or language and both complement type and sentence version ($p >$ `r cop_sum |> filter(grepl("cop_type[12]:q_type1:lang_group", term)) |> pull(p.value) |> min() |> floor_dec(1)`).
+
+## Past tense marking
+
+```{r past}
+past <- data_tib |> 
+  filter(lang_group != 'O',
+         test_phen == 2) |> 
+  mutate(past_type = past_type |> as.factor() |> 
+           fct_shift(1) |> `contrasts<-`(value = contr.sum(5) * 0.5),
+         q_type = q_type |> fct_drop() |> `contrasts<-`(value = contr.sum(2) * 0.5),
+         lang_group = lang_group |> fct_drop() |> `contrasts<-`(value = contr.sum(2) * 0.5))
+
+past_lm <- lmer(value ~ past_type * q_type * lang_group + 
+                 (1 | ResponseId) + (1 | s_label),
+               data = past)
+
+past_sum <- past_lm |> tidy()
+```
+
+(ref:past-plot) Distributions of ratings for past tense constructions by past tense marker, sentence version, and language group. Black dashed lines indicate means. C: Chinese; M: Malay.
+```{r past-plot, out.width="100%", fig.cap="(ref:past-plot)"}
+past_mean <- past |> 
+  group_by(past_type, s_variant) |> 
+  summarise(mean = mean(value),
+            sd = sd(value),
+            count = n()) |> 
+  mutate(se = sd / sqrt(count),
+         lower_ci = mean - se,
+         upper_ci = mean + se)
+
+past_lab <- labeller(
+  s_variant = c("a" = "With past marking", "b" = "Without past marking"), 
+  past_type = c(`1` = "Suppletion", `2` = "Vowel", `3` = "[t]/[d]",
+                `4` = "[ɪd]", `5` = "Vwl + [t]/[d]"))
+
+past_plot <- ggplot(data = past |> mutate(past_type = past_type |> 
+                               fct_relevel(c("1", "5", "2", "4", "3")))) +
+  geom_bar(aes(x = value, fill = lang_group), stat = "count") +
+  geom_vline(aes(xintercept = mean), data = past_mean, lty = "dashed") +
+  facet_grid(past_type ~ s_variant, labeller = past_lab) +
+  labs(x = "Rating", y = "Count") +
+  scale_fill_brewer(palette = "Set2", name = "MT")
+
+past_plot
+```
+
+```{r past_stats}
+past_sw <- past_lm |> compute_redres() |> shapiro.test()
+past_emm_qt <- emmeans(cop_lm, ~ q_type) |> tidy()
+past_emm_lqt <- emmeans(cop_lm, ~ lang_group | q_type)
+past_con_lqt <- contrast(past_emm_lqt, method = "pairwise") |> tidy()
+past_emm_lg <- emmeans(cop_lm, ~ lang_group) |> tidy()
+```
+
+Participants' ratings for items involving past tense constructions are shown in Figure \@ref(fig:past-plot). 
+We conducted a linear regression with rating as the outcome variable, and past marking type, sentence version, and MT as fixed effects with sum contrasts, along with all interactions. 
+We also included participant and item as random effects.
+The full model specification is as follows: `rating ~ past_type * sent_version * mt + (1 | ppt_id) + (1 | item_id)`.[^03-03]
+
+[^03-03]: Similar to the ratings for copular constructions, Shapiro--Wilk test revealed that residuals of the linear regression were not normally distributed ($W =$ `r past_sw$statistic`, $p < .001$). 
+Again, visual observation of the Q--Q plot suggested that the deviation was minor and only occurred near the top tail of the distribution, which was expected due to negative skew (`r skewness(past$value)`) associated with a ceiling effect. 
+As such, linear regression remained the analysis of choice.
+```{r past-resqq}
+past_resqq <- plot_resqq(past_lm)
+```
+
+Model results suggested that there was again a main effect of sentence version ($b =$ `r past_sum |> filter(term == "q_type1") |> pull(estimate)`, $p =$ `r past_sum |> filter(term == "q_type1") |> pull(p.value)`), with sentences including the copula having higher mean ratings (`r past_emm_qt |> filter(q_type == 1) |> pull(estimate)` $\pm$ `r past_emm_qt |> filter(q_type == 1) |> pull(std.error)`) than sentences without the copula (`r past_emm_qt |> filter(q_type == 2) |> pull(estimate)` $\pm$ `r past_emm_qt |> filter(q_type == 2) |> pull(std.error)`).
+
+There was again no main effect of MT ($b =$ `r past_sum |> filter(term == "lang_group1") |> pull(estimate)`, $p =$ `r past_sum |> filter(term == "lang_group1") |> pull(p.value)`), suggesting that mean ratings did not differ between Chinese speakers (`r past_emm_lg |> filter(lang_group == "C") |> pull(estimate)` $\pm$ `r past_emm_lg |> filter(lang_group == "C") |> pull(std.error)`) and Malay speakers (`r past_emm_lg |> filter(lang_group == "M") |> pull(estimate)` $\pm$ `r past_emm_lg |> filter(lang_group == "C") |> pull(std.error)`).
+
+In contrast with the pattern of results for copular constructions, there were no significant interaction effects between past marking type and sentence version (all $p >$ `r past_sum |> filter(grepl("past_type[1-4]:q_type1$", term)) |> pull(p.value) |> min() |> floor_dec(2)`).
+There were also no significant interaction effects between past marking type and both question type and MT (all $p >$ `r past_sum |> filter(grepl("past_type[1-4]:q_type1:", term)) |> pull(p.value) |> min() |> floor_dec(2)`).
+
+Conversely, there was a significant interaction effect between sentence version and MT ($b =$ `r past_sum |> filter(term == "q_type1:lang_group1") |> pull(estimate)`, $p =$ `r past_sum |> filter(term == "q_type1:lang_group1") |> pull(p.value)`), as shown in Figure \@ref(fig:past-pw). 
+Post-hoc pairwise comparisons using the Tukey method did not reveal any simple effects of MT (all $p >$ `r past_con_lqt |> pull(p.value) |> min() |> floor_dec(1)`), suggesting that Chinese and Malay speakers did not differ in their ratings for either sentence version, although they differed in the _difference_ in ratings between sentences with and without past tense marking. 
+
+```{r past-pairwise, eval=F}
+past_emm <- emmeans(past_lm, ~ past_type | q_type)
+past_con <- contrast(past_emm, method = "pairwise") |> 
+  as_tibble() |>
+  separate(contrast, c("g1", "g2"), " - ") |> 
+  mutate(group1 = pmin(g1, g2),
+         group2 = pmax(g1, g2),
+         p.signif = cut(p.value,
+                        breaks = c(-Inf, .0001, .001, .01, .05, .1, 1),
+                        labels = c("****", "***", "**", "*", "ns", "ns"))) |> 
+  select(-g1, -g2) |> 
+  arrange(q_type, group2) |> 
+  add_x_position(x = "past_type", 
+                 group = "q_type", 
+                 dodge = 0.9)
+
+past_pw <- ggplot(data = past_mean |> mutate(past_type = past_type |> 
+                                             fct_relevel(c("1", "5", "2", "4", "3")) |> 
+                                             fct_recode("Suppletion" = "1", 
+                                                        "Vowel" = "2",
+                                                        "[t]/[d]" = "3",
+                                                        "[ɪd]" = "4",
+                                                        "Vwl + [t]/[d]" = "5"))) +
+  geom_col(aes(y = mean, x = past_type, fill = s_variant),
+           position = position_dodge()) +
+  geom_errorbar(aes(ymin = lower_ci, ymax = upper_ci, 
+                    x = past_type, group = s_variant),
+                width = 0.3,
+                position = position_dodge(width = 0.9)) +
+  stat_pvalue_manual(past_con,
+                     y.position = 1.1 * max(past_mean$mean),
+                     step.increase = 0.2,
+                     tip.length = 0.03,
+                     hide.ns = T) +
+  labs(x = "Past type", y = "Mean rating") +
+  scale_fill_manual(name = "Sentence type",
+                    labels = c("With past marking", "Without past marking"),
+                    values = c("lightsalmon", "lightslateblue"))
+```
+
+(ref:past-pw) Mean ratings for past tense constructions by MT and sentence version. 
+```{r past-pw, out.width="100%", fig.cap="(ref:past-pw)"}
+past_mean_2 <- past |> 
+  group_by(lang_group, s_variant) |> 
+  summarise(mean = mean(value),
+            sd = sd(value),
+            count = n()) |> 
+  mutate(se = sd / sqrt(count),
+         lower_ci = mean - se,
+         upper_ci = mean + se)
+
+past_lm_2 <- lmer(value ~ q_type * lang_group + 
+                    (1 | ResponseId) + (1 | s_label),
+                  data = past)
+past_emm_2 <- emmeans(past_lm_2, ~ lang_group | q_type)
+past_con_2 <- contrast(past_emm_2, method = "pairwise") |> 
+  as_tibble() |>
+  separate(contrast, c("group1", "group2"), " - ") |> 
+  mutate(p.signif = cut(p.value,
+                        breaks = c(-Inf, .0001, .001, .01, .05, .1, 1),
+                        labels = c("****", "***", "**", "*", "ns", "ns"))) # |> 
+  # arrange(q_type, group2)# |> 
+  #add_x_position(x = "past_type", 
+                 # group = "q_type", 
+                 # dodge = 0.9)
+
+# doesn't work; need to redefine past_mean
+past_pw_2 <- ggplot(data = past_mean_2) +
+  geom_col(aes(y = mean, x = lang_group, fill = s_variant),
+           position = position_dodge()) +
+  geom_errorbar(aes(ymin = lower_ci, ymax = upper_ci, 
+                    x = lang_group, group = s_variant),
+                width = 0.3,
+                position = position_dodge(width = 0.9)) +
+  stat_pvalue_manual(past_con_2,
+                     y.position = 1.1 * max(past_mean_2$mean),
+                     step.increase = 0.2,
+                     tip.length = 0.03,
+                     hide.ns = T) +
+  labs(x = "Language group", y = "Mean rating") +
+  scale_fill_manual(name = "Sentence type",
+                    labels = c("With past marking", "Without past marking"),
+                    values = c("lightsalmon", "lightslateblue"))
+
+past_pw_2
+```
+
+## Individual differences
+
+To better understand the observed variation in responses, we conducted two further exploratory analyses.
+The first analysis involved understanding the relationship in participants' responses to the two types of constructions studied: were participants who rated CSE copula constructions more highly also more likely to rate CSE past tense constructions more highly?
+We calculated the mean and 95% confidence intervals for both types of CSE constructions for each participant, shown in Figure \@ref(fig:cor).
+
+(ref:cor) Ratings for copula and past tense CSE constructions by participant. Error bars indicate 95% confidence intervals.
+```{r cor, out.width="100%", fig.cap="(ref:cor)"}
+both <- data_tib |> 
+  filter(lang_group != "O",
+         q_type == 2) |> 
+  group_by(ResponseId, test_phen) |> 
+  summarise(avg_rating = mean(value),
+            sd_rating = sd(value),
+            n = n()) |> 
+  mutate(se_rating = sd_rating / sqrt(n)) |> 
+  select(-sd_rating, -n) |> 
+  pivot_wider(names_from = test_phen,
+              values_from = c(avg_rating, se_rating))
+
+both_cor <- cor(both$avg_rating_1, both$avg_rating_2)
+
+both_plot <- ggplot(both,
+                    aes(x = avg_rating_1, y = avg_rating_2)) +
+  geom_point() +
+  geom_errorbar(aes(ymin = avg_rating_2 - 0.95*se_rating_2, 
+                    ymax = avg_rating_2 + 0.95*se_rating_2),
+                alpha = .5) +
+  geom_errorbar(aes(xmin = avg_rating_1 - 0.95*se_rating_1, 
+                    xmax = avg_rating_1 + 0.95*se_rating_1),
+                alpha = .5) +
+  geom_smooth(method = "lm") +
+  geom_abline(slope = 1, intercept = 0, lty = "dashed") +
+  labs(x = "Copula construction rating",
+       y = "Past tense construction rating")
+```
+
+The correlation in means between the two types of CSE constructions was moderate, $r =$ `r both_cor`, suggesting that participants sometimes (but not always) endorsed both types of CSE constructions with similar ratings.
+Additionally, many of the points lay above the $y = x$ line, suggesting that participants generally rated the CSE past tense constructions higher than the CSE copula constructions.
+
+The second analysis studied the relationship between participants' ratings and their self-assessed MT language proficiency.
+A histogram of participants' MT proficiencies is shown in Figure \@ref(fig:prof)
+
+(ref:prof): Histogram of participants' self-assess MT language proficiency by language group.
+```{r prof, out.width="100%", fig.cap="(ref:prof)"}
+ppts <- data_tib |> 
+  filter(lang_group != "O") |> 
+  select(ResponseId, lang_group, proficiency) |> 
+  distinct()
+
+prof_plot <- ggplot(ppts, aes(x = proficiency)) + 
+  geom_bar(aes(fill = lang_group), position = "dodge") +
+  scale_fill_brewer(palette = "Set2", name = "MT") +
+  labs(x = "MT proficiency",
+       y = "Number of participants")
+```
+
+As the sample size did not support running a full statistical model with all levels of interaction, we omitted copula or past tense type as predictors, and instead ran a single joint model on both constructions.
+We conducted a linear regression with rating as the outcome variable, and construction, sentence version, MT, and MT proficiency as fixed effects, along with all interactions. 
+Construction, sentence version, and MT were coded with sum contrasts, and MT proficiency was standardised. 
+We also included participant and item as random effects.
+
+
+```{r prof}
+by_prof <- data_tib |> 
+  filter(lang_group != "O",
+         test_phen %in% c(1, 2)) |> 
+  mutate(test_phen = test_phen |> as.factor() |> `contrasts<-`(value = contr.sum(2) * 0.5),
+         q_type = q_type |> fct_drop() |> `contrasts<-`(value = contr.sum(2) * 0.5),
+         lang_group = lang_group |> fct_drop() |> `contrasts<-`(value = contr.sum(2) * 0.5),
+         proficiency = proficiency |> scale())
+
+prof_lm <- lmer(value ~ test_phen * q_type * lang_group * proficiency + 
+          (1 | ResponseId) + (1 | s_label),
+      data = by_prof)
+
+cop_prof <- lmer(value ~ q_type * lang_group * proficiency + 
+          (1 | ResponseId) + (1 | s_label),
+      data = cop)
+
+# cop_prof_b <- brm(value ~ cop_type * q_type * lang_group * proficiency + 
+#           (1 | ResponseId) + (1 | s_label),
+#       data = cop,
+#       cores = 4,
+#       prior = c(set_prior("normal(0,1)", class = "b")))
+# note: multicollinearity between cop_type and proficiency 
+
+# proficiency by rating
+cop_prof_plot <- ggplot(cop, aes(x = proficiency, y = value)) + 
+  geom_jitter(aes(shape = q_type, col = lang_group)) + 
+  geom_smooth(aes(lty = q_type, col = lang_group), method = "lm")
+
+past_prof <- lmer(value ~ past_type * q_type * lang_group * proficiency + 
+          (1 | ResponseId) + (1 | s_label),
+      data = past)
+
+# proficiency by rating
+past_prof_plot <- ggplot(past, aes(x = proficiency, y = value)) + 
+  geom_jitter(aes(shape = q_type, col = lang_group)) + 
+  geom_smooth(aes(lty = q_type, col = lang_group), method = "lm")
+
+# past_prof_b <- brm(value ~ past_type * q_type * lang_group * proficiency + 
+#           (1 | ResponseId) + (1 | s_label),
+#       data = past,
+#       cores = 4,
+#       prior = c(set_prior("normal(0,1)", class = "b")))
+
+```

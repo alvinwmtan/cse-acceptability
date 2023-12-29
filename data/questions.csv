@@ -1,0 +1,155 @@
+﻿question,q_label,s_label,s_variant,q_no,test_phen,cop_type,past_type,fill_type,q_type,sentence
+Q3_1,A,,,1,0,0,0,0,0,He cannot anyhow say people.
+Q3_2,B,,,2,0,0,0,0,0,She go home already.
+Q3_3,C,,,3,0,0,0,0,0,I don't have ticket.
+Q3_4,D,,,4,0,0,0,0,0,They got time to finish one.
+Q3_5,E,,,5,0,0,0,0,0,We sit here talk.
+Q3_6,F,,,6,0,0,0,0,0,Her daughter is very friendly.
+Q3_7,G,,,7,0,0,0,0,0,They will wipe the table.
+Q3_8,H,,,8,0,0,0,0,0,My uncle has finished eating.
+Q3_9,I,,,9,0,0,0,0,0,The fuel in the tank is enough.
+Q3_10,J,,,10,0,0,0,0,0,The rabbit has too much food.
+Q4_1,01a,1,a,11,1,1,0,0,1,John is a doctor.
+Q4_10,28a,28,a,38,1,3,0,0,1,Breakfast is in the morning.
+Q4_11,32b,32,b,108,1,3,0,0,2,Our flight at seven.
+Q4_12,33b,33,b,109,1,3,0,0,2,Food in the kitchen.
+Q4_13,37a,37,a,47,2,0,1,0,1,Yesterday I went there.
+Q4_14,40b,40,b,116,2,0,1,0,2,The exam last Tuesday is very hard.
+Q4_15,43a,43,a,53,2,0,2,0,1,She said that you took her book.
+Q4_16,46b,46,b,122,2,0,2,0,2,She eat the cake last night.
+Q4_17,49a,49,a,59,2,0,3,0,1,Before this he stayed at his friend's place.
+Q4_18,52b,52,b,128,2,0,3,0,2,He brush his hair when he woke up.
+Q4_19,55a,55,a,65,2,0,4,0,1,"When I was young, I wanted to be a doctor."
+Q4_2,02a,2,a,12,1,1,0,0,1,Lucy is the English teacher.
+Q4_20,58b,58,b,134,2,0,4,0,2,His mother paint the wall white the first time.
+Q4_21,61a,61,a,71,2,0,5,0,1,His wife brought cake for the last party.
+Q4_22,64b,64,b,140,2,0,5,0,2,Their father buy the house three years ago.
+Q4_23,67,67,,143,3,0,0,1,3,You become in the house.
+Q4_24,70,70,,149,3,0,0,2,3,He became a teacher.
+Q4_3,07b,7,b,83,1,1,0,0,2,Sally baker.
+Q4_4,08b,8,b,84,1,1,0,0,2,James the car mechanic.
+Q4_5,13a,13,a,23,1,2,0,0,1,Marcus is good.
+Q4_6,14a,14,a,24,1,2,0,0,1,Ann is clever.
+Q4_7,19b,19,b,95,1,2,0,0,2,Samuel happy.
+Q4_8,20b,20,b,96,1,2,0,0,2,Kate pretty.
+Q4_9,25a,25,a,35,1,3,0,0,1,Tom is at home.
+Q6_1,01b,1,b,77,1,1,0,0,2,John doctor.
+Q6_10,28b,28,b,104,1,3,0,0,2,Breakfast in the morning.
+Q6_11,32a,32,a,42,1,3,0,0,1,Our flight is at seven.
+Q6_12,33a,33,a,43,1,3,0,0,1,Food is in the kitchen.
+Q6_13,37b,37,b,113,2,0,1,0,2,Yesterday I go there.
+Q6_14,40a,40,a,50,2,0,1,0,1,The exam last Tuesday was very hard.
+Q6_15,43b,43,b,119,2,0,2,0,2,She say that you took her book.
+Q6_16,46a,46,a,56,2,0,2,0,1,She ate the cake last night.
+Q6_17,49b,49,b,125,2,0,3,0,2,Before this he stay at his friend's place.
+Q6_18,52a,52,a,62,2,0,3,0,1,He brushed his hair when he woke up.
+Q6_19,55b,55,b,131,2,0,4,0,2,"When I was young, I want to be a doctor."
+Q6_2,02b,2,b,78,1,1,0,0,2,Lucy the English teacher.
+Q6_20,58a,58,a,68,2,0,4,0,1,His mother painted the wall white the first time.
+Q6_21,61b,61,b,137,2,0,5,0,2,His wife bring cake for the last party.
+Q6_22,64a,64,a,74,2,0,5,0,1,Their father bought the house three years ago.
+Q6_23,67,67,,144,3,0,0,1,3,You become in the house.
+Q6_24,70,70,,150,3,0,0,2,3,He became a teacher.
+Q6_3,07a,7,a,17,1,1,0,0,1,Sally is a baker.
+Q6_4,08a,8,a,18,1,1,0,0,1,James is the car mechanic.
+Q6_5,13b,13,b,89,1,2,0,0,2,Marcus good.
+Q6_6,14b,14,b,90,1,2,0,0,2,Ann clever.
+Q6_7,19a,19,a,29,1,2,0,0,1,Samuel is happy.
+Q6_8,20a,20,a,30,1,2,0,0,1,Kate is pretty.
+Q6_9,25b,25,b,101,1,3,0,0,2,Tom at home.
+Q7_1,03a,3,a,13,1,1,0,0,1,My friend is a chef.
+Q7_10,30a,30,a,40,1,3,0,0,1,Our trip is on Tuesday.
+Q7_11,34b,34,b,110,1,3,0,0,2,The show in twenty minutes.
+Q7_12,35b,35,b,111,1,3,0,0,2,My robot on the floor.
+Q7_13,38a,38,a,48,2,0,1,0,1,In the sixties he was a policeman.
+Q7_14,41b,41,b,117,2,0,1,0,2,Just now they go to the shop.
+Q7_15,44a,44,a,54,2,0,2,0,1,My sister found a job two days ago.
+Q7_16,47b,47,b,123,2,0,2,0,2,I meet your sister at the wedding last year.
+Q7_17,50a,50,a,60,2,0,3,0,1,I tried to do it myself last week.
+Q7_18,53b,53,b,129,2,0,3,0,2,My brother walk the dog yesterday.
+Q7_19,56a,56,a,66,2,0,4,0,1,Last time Sarah hated carrots.
+Q7_2,04a,4,a,14,1,1,0,0,1,His cousin is the older one.
+Q7_20,59b,59,b,135,2,0,4,0,2,They end school last week.
+Q7_21,62a,62,a,72,2,0,5,0,1,Your friend told me what happened.
+Q7_22,65b,65,b,141,2,0,5,0,2,Her cousin teach primary school in the past.
+Q7_23,68,68,,145,3,0,0,1,3,She become at the office.
+Q7_24,71,71,,151,3,0,0,2,3,Their cousin became skinnier.
+Q7_3,09b,9,b,85,1,1,0,0,2,His wife an actress.
+Q7_4,10b,10,b,86,1,1,0,0,2,Her boss the taller one.
+Q7_5,15a,15,a,25,1,2,0,0,1,The kid is careless.
+Q7_6,16a,16,a,26,1,2,0,0,1,The camp is tiring.
+Q7_7,21b,21,b,97,1,2,0,0,2,Their uncle old.
+Q7_8,22b,22,b,98,1,2,0,0,2,The bus fast.
+Q7_9,27a,27,a,37,1,3,0,0,1,Her toy is in the box.
+Q9_1,03b,3,b,79,1,1,0,0,2,My friend a chef.
+Q9_10,30b,30,b,106,1,3,0,0,2,Our trip on Tuesday.
+Q9_11,34a,34,a,44,1,3,0,0,1,The show is in twenty minutes.
+Q9_12,35a,35,a,45,1,3,0,0,1,My robot is on the floor.
+Q9_13,38b,38,b,114,2,0,1,0,2,In the sixties he is a policeman.
+Q9_14,41a,41,a,51,2,0,1,0,1,Just now they went to the shop.
+Q9_15,44b,44,b,120,2,0,2,0,2,My sister find a job two days ago.
+Q9_16,47a,47,a,57,2,0,2,0,1,I met your sister at the wedding last year.
+Q9_17,50b,50,b,126,2,0,3,0,2,I try to do it myself last week.
+Q9_18,53a,53,a,63,2,0,3,0,1,My brother walked the dog yesterday.
+Q9_19,56b,56,b,132,2,0,4,0,2,Last time Sarah hate carrots.
+Q9_2,04b,4,b,80,1,1,0,0,2,His cousin the older one.
+Q9_20,59a,59,a,69,2,0,4,0,1,They ended school last week.
+Q9_21,62b,62,b,138,2,0,5,0,2,Your friend tell me what happened.
+Q9_22,65a,65,a,75,2,0,5,0,1,Her cousin taught primary school in the past.
+Q9_23,68,68,,146,3,0,0,1,3,She become at the office.
+Q9_24,71,71,,152,3,0,0,2,3,Their cousin became skinnier.
+Q9_3,09a,9,a,19,1,1,0,0,1,His wife is an actress.
+Q9_4,10a,10,a,20,1,1,0,0,1,Her boss is the taller one.
+Q9_5,15b,15,b,91,1,2,0,0,2,The kid careless.
+Q9_6,16b,16,b,92,1,2,0,0,2,The camp tiring.
+Q9_7,21a,21,a,31,1,2,0,0,1,Their uncle is old.
+Q9_8,22a,22,a,32,1,2,0,0,1,The bus is fast.
+Q9_9,27b,27,b,103,1,3,0,0,2,Her toy in the box.
+Q10_1,05a,5,a,15,1,1,0,0,1,The apple is one dollar.
+Q10_10,26a,26,a,36,1,3,0,0,1,The meeting is at noon.
+Q10_11,36b,36,b,112,1,3,0,0,2,Their wedding on a weekend.
+Q10_12,31b,31,b,107,1,3,0,0,2,Mary at work.
+Q10_13,39a,39,a,49,2,0,1,0,1,"Ten years ago, the houses were very big."
+Q10_14,42b,42,b,118,2,0,1,0,2,You thought your bags are lost.
+Q10_15,45a,45,a,55,2,0,2,0,1,Last Monday they came twice.
+Q10_16,48b,48,b,124,2,0,2,0,2,Mark dig a hole so he can plant vegetables now.
+Q10_17,51a,51,a,61,2,0,3,0,1,Henry packed for his trip this morning.
+Q10_18,54b,54,b,130,2,0,3,0,2,Jane push me first.
+Q10_19,57a,57,a,67,2,0,4,0,1,This blue shirt faded in the wash.
+Q10_2,06a,6,a,16,1,1,0,0,1,Now is two o'clock.
+Q10_20,60b,60,b,136,2,0,4,0,2,I fold the clothes just now.
+Q10_21,63a,63,a,73,2,0,5,0,1,They sold their house last month.
+Q10_22,66b,66,b,142,2,0,5,0,2,The food feel very cold before I put it in the oven.
+Q10_23,69,69,,147,3,0,0,1,3,The box become on the floor.
+Q10_24,72,72,,153,3,0,0,2,3,The sky became dark.
+Q10_3,11b,11,b,87,1,1,0,0,2,That one eighty cents.
+Q10_4,12b,12,b,88,1,1,0,0,2,Tomorrow Saturday.
+Q10_5,17a,17,a,27,1,2,0,0,1,Their shop is far.
+Q10_6,18a,18,a,28,1,2,0,0,1,Your dog is big.
+Q10_7,23b,23,b,99,1,2,0,0,2,The supermarket open.
+Q10_8,24b,24,b,100,1,2,0,0,2,Your flat nice.
+Q10_9,29a,29,a,39,1,3,0,0,1,Your book is on the table.
+Q12_1,05b,5,b,81,1,1,0,0,2,The apple one dollar.
+Q12_10,26b,26,b,102,1,3,0,0,2,The meeting at noon.
+Q12_11,36a,36,a,46,1,3,0,0,1,Their wedding is on a weekend.
+Q12_12,31a,31,a,41,1,3,0,0,1,Mary is at work.
+Q12_13,39b,39,b,115,2,0,1,0,2,"Ten years ago, the houses are very big."
+Q12_14,42a,42,a,52,2,0,1,0,1,You thought your bags were lost.
+Q12_15,45b,45,b,121,2,0,2,0,2,Last Monday they come twice.
+Q12_16,48a,48,a,58,2,0,2,0,1,Mark dug a hole so he can plant vegetables now.
+Q12_17,51b,51,b,127,2,0,3,0,2,Henry pack for his trip this morning.
+Q12_18,54a,54,a,64,2,0,3,0,1,Jane pushed me first.
+Q12_19,57b,57,b,133,2,0,4,0,2,This blue shirt fade in the wash.
+Q12_2,06b,6,b,82,1,1,0,0,2,Now two o'clock.
+Q12_20,60a,60,a,70,2,0,4,0,1,I folded the clothes just now.
+Q12_21,63b,63,b,139,2,0,5,0,2,They sell their house last month.
+Q12_22,66a,66,a,76,2,0,5,0,1,The food felt very cold before I put it in the oven.
+Q12_23,69,69,,148,3,0,0,1,3,The box become on the floor.
+Q12_24,72,72,,154,3,0,0,2,3,The sky became dark.
+Q12_3,11a,11,a,21,1,1,0,0,1,That one is eighty cents.
+Q12_4,12a,12,a,22,1,1,0,0,1,Tomorrow is Saturday.
+Q12_5,17b,17,b,93,1,2,0,0,2,Their shop far.
+Q12_6,18b,18,b,94,1,2,0,0,2,Your dog big.
+Q12_7,23a,23,a,33,1,2,0,0,1,The supermarket is open.
+Q12_8,24a,24,a,34,1,2,0,0,1,Your flat is nice.
+Q12_9,29b,29,b,105,1,3,0,0,2,Your book on the table.
