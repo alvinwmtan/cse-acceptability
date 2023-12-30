@@ -1,0 +1,47 @@
+Contact languages as an insight into language change and sociolinguistics
+Description of CSE
+
+
+
+
+CSE, like SSE, has the copula be. Unlike SSE, however, CSE also permits a zero copula, exemplified in (44), adapted from [@changCopulaDeletionColloquial2009].
+(44) a. Today ∅ [NP Saturday].
+b. Tom ∅ [AP clever].
+c. Tom ∅ [PP at home].
+
+A number of studies have examined the contexts in which the zero copula is licensed [@changCopulaDeletionColloquial2009; @hoDynamicsContactContinuum1993; @plattVariationImplicationalRelationships1979; @yuCopulalessNonverbalPredication2015]. 
+In particular, empirical data from the 1970s suggests that the distribution of the zero copula was affected by speakers’ L1 (Chinese or Malay)[^01-01]---Platt [@plattVariationImplicationalRelationships1979] found that Malay speakers had the zero copula most consistently with PPs, followed by APs and then NPs, while the rates for Chinese speakers were mostly equal (although slightly higher for APs), as shown in Figure 2.2. 
+In their analysis of Platt’s data, Sharma and Rickford [@sharmaAAVECreoleCopula2009] suggest that the difference in distributions may be due to the influence of copular constructions in the L1s: 
+"The greater absence of copulas in Malay may explain the higher frequencies of zero copula among Malay-medium students. 
+Similarly, the higher rate of omission with adjectival predicatives among Mandarin and Cantonese speakers learning English may derive from its parallel absence in their first languages." (p. 72)
+
+[^01-01]: In Platt’s study, "L1 language" was based on the language medium of the schools attended by the informants (as there were Chinese- and Malay-medium schools prior to 1987). 
+Additionally, complements labelled "PP" only included locatives, and not temporals or other types of PP construction.
+
+While this study has been seminal in CSE sociolinguistics, certain issues remain regarding zero copula distribution. 
+Firstly, the data were obtained through speaker recordings, thus there was no way to control for other factors such as adverbials and discourse particles, which contribute pragmatic information and are known to affect the acceptability of the zero copula [@changCopulaDeletionColloquial2009; @yuCopulalessNonverbalPredication2015]. 
+Secondly, the data were based on a relatively small sample of 3 Malay and 14 Chinese informants, thus the generalisability of the results is uncertain---for instance, the 100% rate of zero copula in PP complements for Malay speakers was based on only 5 tokens. 
+Finally, and most significantly, much has changed in the sociolinguistic landscape of Singapore since 1979, when this study was published. 
+The “Speak Mandarin Campaign” launched in 1979 encouraged Chinese Singaporeans to speak Mandarin instead of other Chinese varieties to unify the ethnic Chinese population, resulting in greater linguistic homogeneity among the Chinese.
+Furthermore, the introduction of the “national stream” in 1983 meant that all students were educated in English as their first language by 1987, with their MT as their second language. 
+Subsequent improvements in the quality and reach of education has meant that most current Singaporeans are effectively bilingual, and many would consider English to be their household language [cite Suzy Styles]; thus, “L1” is no longer a helpful term to designate the substrate languages of CSE, and “MT” is more relevant as a label for the languages other than English that Singaporeans are educated in, whether or not this is actually their “first” or “household” language.
+Thus, more research is necessary to isolate the effect of complement type, characterise the influence of the substrate languages on CSE, and determine its change and variation in the contemporary linguistic landscape of Singapore.
+
+
+
+
+
+
+More recent characterisations of CSE copular constructions have taken a more theoretical approach, focusing on possible origins of copula optionality [@ansaldoContactAsianVarieties2010; @changCopulaDeletionColloquial2009] and syntactic principles underlying constructional variation [@yuCopulalessNonverbalPredication2015]. 
+While these have provided detailed syntactic and sociolinguistic analyses of CSE copular constructions, they are limited in relying solely on the linguist’s intuitions, or possibly with a handful of informants. 
+Juzek [@juzekAcceptabilityJudgementTasks2015] has noted several issues with this approach:
+(45) a. Judgement errors: speakers’ judgements are subject to performance noise.
+b. Quantisation errors: speakers’ ‘inherent’ scales of grammaticality may not map perfectly onto the scales used.
+c. Purpose biases: speakers may alter their behaviour to accommodate the experimenter.
+d. Scale biases: the meaning of a scale may differ between speakers.
+e. Differences in grammars: speakers of the same language may have slightly different grammars.
+The relevance of these errors is immediately apparent when examining examples given in descriptions of CSE copular constructions. 
+For example, (46) is given by both Chang [@changCopulaDeletionColloquial2009] (p. 30) and Yu [@yuCopulalessNonverbalPredication2015] (p. 11); Chang considers it to be perfectly acceptable, while Yu marks it with ‘∗/?’, indicating that he considers it at least somewhat unacceptable.
+(46) Tom ∅ clever.
+
+-> also, acceptability judgements are important when you know explicitly that there is variation in responses. Like in the case of CSE, which is a continuum, and different speakers lie at different points.

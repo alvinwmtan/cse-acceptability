@@ -1,0 +1,53 @@
+# Discussion
+
+Using acceptability judgements from Chinese and Malay MT speakers, we found that ratings for different sentences varied across constructions, complement or past tense type, and individual speakers.
+Specifically, for copula constructions, ratings for PP complements were higher than ratings for NP or AP complements when the copula was absent.
+For past tense constructions, the difference in ratings between marked and unmarked past tense constructions was larger for Malay speakers than Chinese speakers.
+Finally, speakers with greater Chinese proficiency rated both SSE and CSE sentences more highly than speakers with lower proficiency, whereas speakers with greater Malay proficiency rated CSE sentences more highly but SSE sentences more poorly than speakers with lower proficiency.
+
+These results suggest that MT has no effect on acceptability ratings of copula constructions in CSE speakers.
+This contrasts with earlier work from @plattVariationImplicationalRelationships1979, which suggests that there were greater differences in the copula use of Chinese- and Malay-speaking Singaporeans in the 1970s.
+In comparison, the data in the present study suggest that much of the difference has been eliminated in contemporary CSE, indicating levelling of variability.
+Thus, it is likely that the continued interactions between Chinese and Malay speakers, as well as increased standardisation and amount of education, have resulted in the levelling of syntactic variation between the two groups.
+Focusing on the pattern of acceptability ratings across different complement types, it seems that PP complements are most acceptable without a copula, followed by NP and then AP (which may not differ significantly from each other).
+One possible (but highly speculative) explanation for this pattern is that the preposition in the PP is gaining some 'copular' function---i.e., linking the subject with a (spatiotemporal) position---perhaps due to the influence of the Chinese locative copula _zài_.
+
+In contrast, there were no differences across past tense types in CSE speakers.
+This again differs from earlier work from @hoDynamicsContactContinuum1993, who found that past tense forms involving a vowel change were more likely to be produced than past tense forms involving [ɪd] affixation or vowel change and [t]/[d] appending, and past tense forms involving only [t]/[d] affixation were almost never produced.
+One explanation for this finding is that the variation in past tense marking is strongly phonetic in nature, and therefore the translation into the visual presentation modality was sufficient to level any differences in endorsement of unmarked past tense forms.
+A natural extension for further research would thus be to collect acceptability judgements using stimuli presented aurally, which may reveal more nuanced variation that was not captured by the present questionnaire.
+
+Interestingly, for past tense constructions, we observed an interaction between sentence version and MT, such that Malay speakers had larger differences in ratings between SSE and CSE sentences than Chinese speakers.
+This effect was not observed by @hoDynamicsContactContinuum1993, who did not analyse past tense marking as a function of MT.
+As we did not find any simple main effects related to this interaction effect, it is difficult to pinpoint the source of this disparity.
+- Speculate? How to disentangle? -> wait for exploratory analysis
+
+
+individual differences -> variation in the bundles of CSE features which speakers adopt
+proficiency -> note that MT proficiency may be inversely related to English proficiency, but we're not sure
+conclusion about importance of using acceptbility judgements to reveal more nuanced variation
+
+
+
+
+
+
+## Limitations and future work
+One inadvertent limitation of the main study is participant distribution.
+The participant pool was imbalanced with regard to MT, and there was also a high proportion of university students.
+The latter observation is particularly unfortunate as individuals of lower socioeconomic status tend to exhibit more basilectal features in their language use [@plattVariationImplicationalRelationships1979], which may have been relevant in this study.
+Nonetheless, the relative proportions of Malay-speaking and Chinese-speaking respondents are comparable to those of ethnic Malay and Chinese Singaporeans aged 18--25, and a vast majority of this age range has attended, is attending, or is about to attend university.
+Furthermore, the participants were recruited by word of mouth, without specific soliciting of participants from a particular MT or socioeconomic background (to avoid demand characteristics).
+Future studies using a different recruitment method and a stratified sampling approach would help to alleviate this issue, and would also open the possibility of studying the judgements of speakers of other MTs (e.g., Indian languages).
+
+Another issue that arose in the course of data analysis is that SSE sentences may have exhibited a ceiling effect.
+All three complement types had a mean rating of $> 4$ and a skew of $< −1$, suggesting that acceptability for these sentences may be almost at maximum, resulting in difficult result interpretation due to limited variation.
+However, this result is unsurprising given that SSE is the primary medium of education in schools, and is often considered the prestigious or 'correct' variety, thus there is little reason for participants to score SSE sentences poorly (other than possible 'stiltedness' if they felt they were unlikely to use such sentences in ordinary CSE speech).
+Nonetheless, future research in this area may employ alternative study designs focusing exclusively on CSE sentences, which may eliminate this problem.
+
+<!-- This section needs to be rewritten slightly -->
+Finally, only 3\textsc{sg} subjects were used as the focus was on the effect of complement types, thus the results may not be generalisable to other types of subjects.
+Research by @hoDynamicsContactContinuum1993 suggests that the preceding environment does have an effect on copula use, with 1\textsc{sg} and 3\textsc{sg} pronouns promoting copula use, and other pronouns and NPs promoting a zero copula.
+The use of both 3\textsc{sg} pronominal and NP subjects in this study seems to cover both directions of influence of the preceding environment, although a broader study investigating the effects of other subjects may provide a more comprehensive description of copula optionality in CSE.
+
+

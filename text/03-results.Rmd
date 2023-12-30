@@ -33,7 +33,7 @@ cop_lm <- lmer(value ~ cop_type * q_type * lang_group +
 cop_sum <- cop_lm |> tidy()
 ```
 
-(ref:cop-plot) Distributions of ratings for copular constructions by complement type, sentence version, and language group. Black dashed lines indicate means. C: Chinese; M: Malay.
+(ref:cop-plot) Distributions of ratings for copular constructions by complement type, sentence version, and MT. Black dashed lines indicate means. C: Chinese; M: Malay.
 ```{r cop-plot, out.width="100%", fig.cap="(ref:cop-plot)"}
 cop_mean <- cop |> 
   group_by(cop_type, s_variant) |> 
@@ -154,7 +154,7 @@ past_lm <- lmer(value ~ past_type * q_type * lang_group +
 past_sum <- past_lm |> tidy()
 ```
 
-(ref:past-plot) Distributions of ratings for past tense constructions by past tense marker, sentence version, and language group. Black dashed lines indicate means. C: Chinese; M: Malay.
+(ref:past-plot) Distributions of ratings for past tense constructions by past tense marker, sentence version, and MT. Black dashed lines indicate means. C: Chinese; M: Malay.
 ```{r past-plot, out.width="100%", fig.cap="(ref:past-plot)"}
 past_mean <- past |> 
   group_by(past_type, s_variant) |> 
@@ -251,7 +251,7 @@ past_pw <- ggplot(data = past_mean |> mutate(past_type = past_type |>
                     values = c("lightsalmon", "lightslateblue"))
 ```
 
-(ref:past-pw) Mean ratings for past tense constructions by MT and sentence version. 
+(ref:past-pw) Mean ratings for past tense constructions by MT and sentence version. C: Chinese; M: Malay.
 ```{r past-pw, out.width="100%", fig.cap="(ref:past-pw)"}
 past_mean_2 <- past |> 
   group_by(lang_group, s_variant) |> 
@@ -298,6 +298,11 @@ past_pw_2 <- ggplot(data = past_mean_2) +
 past_pw_2
 ```
 
+```{r}
+# exploratory analysis involving verbal semantics
+```
+
+
 ## Individual differences
 
 To better understand the observed variation in responses, we conducted two further exploratory analyses.
@@ -333,33 +338,37 @@ both_plot <- ggplot(both,
   geom_abline(slope = 1, intercept = 0, lty = "dashed") +
   labs(x = "Copula construction rating",
        y = "Past tense construction rating")
+
+both_plot
 ```
 
 The correlation in means between the two types of CSE constructions was moderate, $r =$ `r both_cor`, suggesting that participants sometimes (but not always) endorsed both types of CSE constructions with similar ratings.
 Additionally, many of the points lay above the $y = x$ line, suggesting that participants generally rated the CSE past tense constructions higher than the CSE copula constructions.
 
 The second analysis studied the relationship between participants' ratings and their self-assessed MT language proficiency.
-A histogram of participants' MT proficiencies is shown in Figure \@ref(fig:prof)
+A histogram of participants' MT proficiencies is shown in Figure \@ref(fig:prof-hist).
 
-(ref:prof): Histogram of participants' self-assess MT language proficiency by language group.
-```{r prof, out.width="100%", fig.cap="(ref:prof)"}
+(ref:prof-hist): Histogram of participants' self-assessed MT language proficiency by MT. C: Chinese; M: Malay.
+```{r prof-hist, out.width="100%", fig.cap="(ref:prof-hist)"}
 ppts <- data_tib |> 
   filter(lang_group != "O") |> 
   select(ResponseId, lang_group, proficiency) |> 
   distinct()
 
-prof_plot <- ggplot(ppts, aes(x = proficiency)) + 
+prof_hist <- ggplot(ppts, aes(x = proficiency)) + 
   geom_bar(aes(fill = lang_group), position = "dodge") +
   scale_fill_brewer(palette = "Set2", name = "MT") +
   labs(x = "MT proficiency",
        y = "Number of participants")
+
+prof_hist
 ```
 
 As the sample size did not support running a full statistical model with all levels of interaction, we omitted copula or past tense type as predictors, and instead ran a single joint model on both constructions.
 We conducted a linear regression with rating as the outcome variable, and construction, sentence version, MT, and MT proficiency as fixed effects, along with all interactions. 
 Construction, sentence version, and MT were coded with sum contrasts, and MT proficiency was standardised. 
 We also included participant and item as random effects.
-
+The full model specification is as follows: `rating ~ construction * sent_version * mt * proficiency + (1 | ppt_id) + (1 | item_id)`.
 
 ```{r prof}
 by_prof <- data_tib |> 
@@ -368,41 +377,57 @@ by_prof <- data_tib |>
   mutate(test_phen = test_phen |> as.factor() |> `contrasts<-`(value = contr.sum(2) * 0.5),
          q_type = q_type |> fct_drop() |> `contrasts<-`(value = contr.sum(2) * 0.5),
          lang_group = lang_group |> fct_drop() |> `contrasts<-`(value = contr.sum(2) * 0.5),
-         proficiency = proficiency |> scale())
+         proficiency_std = proficiency |> scale())
 
-prof_lm <- lmer(value ~ test_phen * q_type * lang_group * proficiency + 
+prof_lm <- lmer(value ~ test_phen * q_type * lang_group * proficiency_std + 
           (1 | ResponseId) + (1 | s_label),
       data = by_prof)
 
-cop_prof <- lmer(value ~ q_type * lang_group * proficiency + 
-          (1 | ResponseId) + (1 | s_label),
-      data = cop)
-
-# cop_prof_b <- brm(value ~ cop_type * q_type * lang_group * proficiency + 
-#           (1 | ResponseId) + (1 | s_label),
-#       data = cop,
-#       cores = 4,
-#       prior = c(set_prior("normal(0,1)", class = "b")))
-# note: multicollinearity between cop_type and proficiency 
-
-# proficiency by rating
-cop_prof_plot <- ggplot(cop, aes(x = proficiency, y = value)) + 
-  geom_jitter(aes(shape = q_type, col = lang_group)) + 
-  geom_smooth(aes(lty = q_type, col = lang_group), method = "lm")
-
-past_prof <- lmer(value ~ past_type * q_type * lang_group * proficiency + 
-          (1 | ResponseId) + (1 | s_label),
-      data = past)
-
-# proficiency by rating
-past_prof_plot <- ggplot(past, aes(x = proficiency, y = value)) + 
-  geom_jitter(aes(shape = q_type, col = lang_group)) + 
-  geom_smooth(aes(lty = q_type, col = lang_group), method = "lm")
-
-# past_prof_b <- brm(value ~ past_type * q_type * lang_group * proficiency + 
-#           (1 | ResponseId) + (1 | s_label),
-#       data = past,
-#       cores = 4,
-#       prior = c(set_prior("normal(0,1)", class = "b")))
-
+prof_sum <- prof_lm |> tidy()
 ```
+
+(ref:prof-plot): Ratings for copula and past tense constructions by participants' self-assessed MT language proficiency, sentence version, and MT. C: Chinese; M: Malay.
+```{r prof-plot, out.width="100%", fig.cap="(ref:prof-plot)"}
+# proficiency by rating
+phen_labeller <- function(value) {
+  phen <- list("1" = "Copula", "2" = "Past tense")
+  return(phen[value])
+}
+
+prof_plot <- ggplot(by_prof, aes(x = proficiency, y = value)) + 
+  geom_jitter(aes(shape = q_type, col = lang_group), alpha = .4) + 
+  geom_smooth(aes(lty = q_type, col = lang_group), method = "lm") +
+  scale_color_brewer(palette = "Set2", name = "MT") +
+  scale_linetype_discrete(labels = c("SSE", "CSE")) +
+  scale_shape_discrete(labels = c("SSE", "CSE")) +
+  facet_grid(~ test_phen, labeller = labeller(test_phen = phen_labeller)) +
+  labs(x = "MT proficiency",
+       y = "Rating",
+       linetype = "Sentence version",
+       shape = "Sentence version")
+
+prof_plot
+```
+
+```{r prof-pairwise}
+prof_emm <- emtrends(prof_lm, ~ q_type, var = "proficiency_std") |> 
+  tidy()
+# prof_con <- contrast(past_emm_2, method = "pairwise") |> 
+#   as_tibble() |>
+#   separate(contrast, c("group1", "group2"), " - ") |> 
+#   mutate(p.signif = cut(p.value,
+#                         breaks = c(-Inf, .0001, .001, .01, .05, .1, 1),
+#                         labels = c("****", "***", "**", "*", "ns", "ns")))
+prof_int_emm <- emtrends(prof_lm, ~ q_type * lang_group, var = "proficiency_std") |> 
+  tidy()
+```
+
+Participants' ratings by their self-assessed MT proficiency are shown in Figure \@ref(fig:prof-plot).
+We focus on model results specifically related to MT proficiency, as other results were similar to results reported in the previous sections.
+There was an interaction effect between sentence version and MT proficiency ($b =$ `r prof_sum |> filter(term == "q_type1:proficiency_std") |> pull(estimate)`, $p =$ `r prof_sum |> filter(term == "q_type1:proficiency_std") |> pull(p.value)`), with the estimated marginal trend of MT proficiency being negative for SSE sentences (slope $=$ `r prof_emm |> filter(q_type == 1) |> pull(proficiency_std.trend`) and positive for CSE sentences (slope $=$ `r prof_emm |> filter(q_type == 2) |> pull(proficiency_std.trend`), although neither reached significance (all $p >$ `r prof_emm |> pull(p.value) |> min() |> floor_dec(1)`).
+
+There was also an interaction effect among sentence version, MT, and MT proficiency ($b =$ `r prof_sum |> filter(term == "q_type1:lang_group1:proficiency_std") |> pull(estimate)`, $p =$ `r prof_sum |> filter(term == "q_type1:lang_group1:proficiency_std") |> pull(p.value)`). 
+For Chinese MT speakers, the estimated marginal trend of MT proficiency was positive for both SSE (slope $=$ `r prof_int_emm |> filter(q_type == 1, lang_group == "C") |> pull(proficiency_std.trend`) and CSE (slope $=$ `r prof_int_emm |> filter(q_type == 2, lang_group == "C") |> pull(proficiency_std.trend`) sentences, whereas for Malay MT speakers, the estimated marginal trend of MT proficiency was negative for SSE sentences (slope $=$ `r prof_int_emm |> filter(q_type == 1, lang_group == "M") |> pull(proficiency_std.trend`) but positive for CSE sentences (slope $=$ `r prof_int_emm |> filter(q_type == 2, lang_group == "M") |> pull(proficiency_std.trend`).
+
+In summary, as MT proficiency increased, ratings for CSE sentences also increased for both Chinese and Malay speakers. 
+However, ratings for SSE sentences increased for Chinese speakers but _decreased_ for Malay speakers as MT proficiency increased.
