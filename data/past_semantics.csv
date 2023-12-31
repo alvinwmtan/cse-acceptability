@@ -1,0 +1,61 @@
+﻿question,q_label,s_label,s_variant,q_no,test_phen,cop_type,past_type,fill_type,q_type,sentence,dynamic,durative,telic,aspectual_class
+Q4_13,37a,37,a,47,2,0,1,0,1,Yesterday I went there.,1,1,1,accomplishment
+Q6_13,37b,37,b,113,2,0,1,0,2,Yesterday I go there.,1,1,1,accomplishment
+Q7_13,38a,38,a,48,2,0,1,0,1,In the sixties he was a policeman.,0,1,0,state
+Q9_13,38b,38,b,114,2,0,1,0,2,In the sixties he is a policeman.,0,1,0,state
+Q10_13,39a,39,a,49,2,0,1,0,1,"Ten years ago, the houses were very big.",0,1,0,state
+Q12_13,39b,39,b,115,2,0,1,0,2,"Ten years ago, the houses are very big.",0,1,0,state
+Q4_14,40b,40,b,116,2,0,1,0,2,The exam last Tuesday is very hard.,0,1,0,state
+Q6_14,40a,40,a,50,2,0,1,0,1,The exam last Tuesday was very hard.,0,1,0,state
+Q7_14,41b,41,b,117,2,0,1,0,2,Just now they go to the shop.,1,1,1,accomplishment
+Q9_14,41a,41,a,51,2,0,1,0,1,Just now they went to the shop.,1,1,1,accomplishment
+Q10_14,42b,42,b,118,2,0,1,0,2,You thought your bags are lost.,0,1,0,state
+Q12_14,42a,42,a,52,2,0,1,0,1,You thought your bags were lost.,0,1,0,state
+Q4_15,43a,43,a,53,2,0,2,0,1,She said that you took her book.,1,1,1,accomplishment
+Q6_15,43b,43,b,119,2,0,2,0,2,She say that you took her book.,1,1,1,accomplishment
+Q7_15,44a,44,a,54,2,0,2,0,1,My sister found a job two days ago.,1,0,1,achievement
+Q9_15,44b,44,b,120,2,0,2,0,2,My sister find a job two days ago.,1,0,1,achievement
+Q10_15,45a,45,a,55,2,0,2,0,1,Last Monday they came twice.,1,1,1,accomplishment
+Q12_15,45b,45,b,121,2,0,2,0,2,Last Monday they come twice.,1,1,1,accomplishment
+Q4_16,46b,46,b,122,2,0,2,0,2,She eat the cake last night.,1,1,1,accomplishment
+Q6_16,46a,46,a,56,2,0,2,0,1,She ate the cake last night.,1,1,1,accomplishment
+Q7_16,47b,47,b,123,2,0,2,0,2,I meet your sister at the wedding last year.,1,0,1,achievement
+Q9_16,47a,47,a,57,2,0,2,0,1,I met your sister at the wedding last year.,1,0,1,achievement
+Q10_16,48b,48,b,124,2,0,2,0,2,Mark dig a hole so he can plant vegetables now.,1,1,1,accomplishment
+Q12_16,48a,48,a,58,2,0,2,0,1,Mark dug a hole so he can plant vegetables now.,1,1,1,accomplishment
+Q4_17,49a,49,a,59,2,0,3,0,1,Before this he stayed at his friend's place.,1,1,0,activity
+Q6_17,49b,49,b,125,2,0,3,0,2,Before this he stay at his friend's place.,1,1,0,activity
+Q7_17,50a,50,a,60,2,0,3,0,1,I tried to do it myself last week.,1,1,0,activity
+Q9_17,50b,50,b,126,2,0,3,0,2,I try to do it myself last week.,1,1,0,activity
+Q10_17,51a,51,a,61,2,0,3,0,1,Henry packed for his trip this morning.,1,1,1,accomplishment
+Q12_17,51b,51,b,127,2,0,3,0,2,Henry pack for his trip this morning.,1,1,1,accomplishment
+Q4_18,52b,52,b,128,2,0,3,0,2,He brush his hair when he woke up.,1,1,0,activity
+Q6_18,52a,52,a,62,2,0,3,0,1,He brushed his hair when he woke up.,1,1,0,activity
+Q7_18,53b,53,b,129,2,0,3,0,2,My brother walk the dog yesterday.,1,1,0,activity
+Q9_18,53a,53,a,63,2,0,3,0,1,My brother walked the dog yesterday.,1,1,0,activity
+Q10_18,54b,54,b,130,2,0,3,0,2,Jane push me first.,1,1,0,activity
+Q12_18,54a,54,a,64,2,0,3,0,1,Jane pushed me first.,1,1,0,activity
+Q4_19,55a,55,a,65,2,0,4,0,1,"When I was young, I wanted to be a doctor.",0,1,0,state
+Q6_19,55b,55,b,131,2,0,4,0,2,"When I was young, I want to be a doctor.",0,1,0,state
+Q7_19,56a,56,a,66,2,0,4,0,1,Last time Sarah hated carrots.,0,1,0,state
+Q9_19,56b,56,b,132,2,0,4,0,2,Last time Sarah hate carrots.,0,1,0,state
+Q10_19,57a,57,a,67,2,0,4,0,1,This blue shirt faded in the wash.,1,1,0,activity
+Q12_19,57b,57,b,133,2,0,4,0,2,This blue shirt fade in the wash.,1,1,0,activity
+Q4_20,58b,58,b,134,2,0,4,0,2,His mother paint the wall white the first time.,1,1,1,accomplishment
+Q6_20,58a,58,a,68,2,0,4,0,1,His mother painted the wall white the first time.,1,1,1,accomplishment
+Q7_20,59b,59,b,135,2,0,4,0,2,They end school last week.,1,0,1,achievement
+Q9_20,59a,59,a,69,2,0,4,0,1,They ended school last week.,1,0,1,achievement
+Q10_20,60b,60,b,136,2,0,4,0,2,I fold the clothes just now.,1,1,1,accomplishment
+Q12_20,60a,60,a,70,2,0,4,0,1,I folded the clothes just now.,1,1,1,accomplishment
+Q4_21,61a,61,a,71,2,0,5,0,1,His wife brought cake for the last party.,1,1,1,accomplishment
+Q6_21,61b,61,b,137,2,0,5,0,2,His wife bring cake for the last party.,1,1,1,accomplishment
+Q7_21,62a,62,a,72,2,0,5,0,1,Your friend told me what happened.,1,1,1,accomplishment
+Q9_21,62b,62,b,138,2,0,5,0,2,Your friend tell me what happened.,1,1,1,accomplishment
+Q10_21,63a,63,a,73,2,0,5,0,1,They sold their house last month.,1,0,1,achievement
+Q12_21,63b,63,b,139,2,0,5,0,2,They sell their house last month.,1,0,1,achievement
+Q4_22,64b,64,b,140,2,0,5,0,2,Their father buy the house three years ago.,1,0,1,achievement
+Q6_22,64a,64,a,74,2,0,5,0,1,Their father bought the house three years ago.,1,0,1,achievement
+Q7_22,65b,65,b,141,2,0,5,0,2,Her cousin teach primary school in the past.,1,1,0,activity
+Q9_22,65a,65,a,75,2,0,5,0,1,Her cousin taught primary school in the past.,1,1,0,activity
+Q10_22,66b,66,b,142,2,0,5,0,2,The food feel very cold before I put it in the oven.,0,1,0,state
+Q12_22,66a,66,a,76,2,0,5,0,1,The food felt very cold before I put it in the oven.,0,1,0,state

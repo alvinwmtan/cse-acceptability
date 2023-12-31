@@ -54,7 +54,8 @@ cop_plot <- ggplot(data = cop |> mutate(cop_type = cop_type |>
   geom_vline(aes(xintercept = mean), data = cop_mean, lty = "dashed") +
   facet_grid(cop_type ~ s_variant, labeller = cop_lab) +
   labs(x = "Rating", y = "Count") +
-  scale_fill_brewer(palette = "Set2", name = "MT")
+  scale_fill_brewer(palette = "Set2", name = "MT") +
+  theme(legend.position = "bottom")
 
 cop_plot
 ```
@@ -95,7 +96,7 @@ Sentences with an NP complement were not significantly different than sentences 
 (ref:cop-pw) Mean ratings for copular constructions by complement type and sentence version. \*: $p < .05$, \*\*: $p < .01$.
 ```{r cop-pairwise, out.width="100%", fig.cap="(ref:cop-pw)"}
 cop_emm <- emmeans(cop_lm, ~ cop_type | q_type)
-cop_con <- contrast(cop_emm, method = "pairwise") |> 
+cop_con <- contrast(cop_emm, method = "pairwise", adjust = "tukey") |> 
   as_tibble() |>
   separate(contrast, c("g1", "g2"), " - ") |> 
   mutate(group1 = pmin(g1, g2),
@@ -128,7 +129,8 @@ cop_pw <- ggplot(data = cop_mean |> mutate(cop_type = cop_type |>
   labs(x = "Complement type", y = "Mean rating") +
   scale_fill_manual(name = "Sentence type",
                     labels = c("With copula", "Without copula"),
-                    values = c("lightsalmon", "lightslateblue"))
+                    values = c("lightsalmon", "lightslateblue")) +
+  theme(legend.position = "bottom")
 
 cop_pw
 ```
@@ -136,7 +138,7 @@ cop_pw
 Surprisingly, there were no interaction effects involving MT. 
 There was no interaction between language and complement type ($p >$ `r cop_sum |> filter(grepl("cop_type[12]:lang_group", term)) |> pull(p.value) |> min() |> floor_dec(1)`), or language and sentence version ($p =$ `r cop_sum |> filter(grepl("q_type1:lang_group", term)) |> pull(p.value) |> min() |> floor_dec(1)`), or language and both complement type and sentence version ($p >$ `r cop_sum |> filter(grepl("cop_type[12]:q_type1:lang_group", term)) |> pull(p.value) |> min() |> floor_dec(1)`).
 
-## Past tense marking
+## Past tense marking---past marking type
 
 ```{r past}
 past <- data_tib |> 
@@ -176,7 +178,8 @@ past_plot <- ggplot(data = past |> mutate(past_type = past_type |>
   geom_vline(aes(xintercept = mean), data = past_mean, lty = "dashed") +
   facet_grid(past_type ~ s_variant, labeller = past_lab) +
   labs(x = "Rating", y = "Count") +
-  scale_fill_brewer(palette = "Set2", name = "MT")
+  scale_fill_brewer(palette = "Set2", name = "MT") +
+  theme(legend.position = "bottom")
 
 past_plot
 ```
@@ -211,49 +214,9 @@ There were also no significant interaction effects between past marking type and
 Conversely, there was a significant interaction effect between sentence version and MT ($b =$ `r past_sum |> filter(term == "q_type1:lang_group1") |> pull(estimate)`, $p =$ `r past_sum |> filter(term == "q_type1:lang_group1") |> pull(p.value)`), as shown in Figure \@ref(fig:past-pw). 
 Post-hoc pairwise comparisons using the Tukey method did not reveal any simple effects of MT (all $p >$ `r past_con_lqt |> pull(p.value) |> min() |> floor_dec(1)`), suggesting that Chinese and Malay speakers did not differ in their ratings for either sentence version, although they differed in the _difference_ in ratings between sentences with and without past tense marking. 
 
-```{r past-pairwise, eval=F}
-past_emm <- emmeans(past_lm, ~ past_type | q_type)
-past_con <- contrast(past_emm, method = "pairwise") |> 
-  as_tibble() |>
-  separate(contrast, c("g1", "g2"), " - ") |> 
-  mutate(group1 = pmin(g1, g2),
-         group2 = pmax(g1, g2),
-         p.signif = cut(p.value,
-                        breaks = c(-Inf, .0001, .001, .01, .05, .1, 1),
-                        labels = c("****", "***", "**", "*", "ns", "ns"))) |> 
-  select(-g1, -g2) |> 
-  arrange(q_type, group2) |> 
-  add_x_position(x = "past_type", 
-                 group = "q_type", 
-                 dodge = 0.9)
-
-past_pw <- ggplot(data = past_mean |> mutate(past_type = past_type |> 
-                                             fct_relevel(c("1", "5", "2", "4", "3")) |> 
-                                             fct_recode("Suppletion" = "1", 
-                                                        "Vowel" = "2",
-                                                        "[t]/[d]" = "3",
-                                                        "[ɪd]" = "4",
-                                                        "Vwl + [t]/[d]" = "5"))) +
-  geom_col(aes(y = mean, x = past_type, fill = s_variant),
-           position = position_dodge()) +
-  geom_errorbar(aes(ymin = lower_ci, ymax = upper_ci, 
-                    x = past_type, group = s_variant),
-                width = 0.3,
-                position = position_dodge(width = 0.9)) +
-  stat_pvalue_manual(past_con,
-                     y.position = 1.1 * max(past_mean$mean),
-                     step.increase = 0.2,
-                     tip.length = 0.03,
-                     hide.ns = T) +
-  labs(x = "Past type", y = "Mean rating") +
-  scale_fill_manual(name = "Sentence type",
-                    labels = c("With past marking", "Without past marking"),
-                    values = c("lightsalmon", "lightslateblue"))
-```
-
 (ref:past-pw) Mean ratings for past tense constructions by MT and sentence version. C: Chinese; M: Malay.
 ```{r past-pw, out.width="100%", fig.cap="(ref:past-pw)"}
-past_mean_2 <- past |> 
+past_mean <- past |> 
   group_by(lang_group, s_variant) |> 
   summarise(mean = mean(value),
             sd = sd(value),
@@ -262,11 +225,11 @@ past_mean_2 <- past |>
          lower_ci = mean - se,
          upper_ci = mean + se)
 
-past_lm_2 <- lmer(value ~ q_type * lang_group + 
+past_lm <- lmer(value ~ q_type * lang_group + 
                     (1 | ResponseId) + (1 | s_label),
                   data = past)
-past_emm_2 <- emmeans(past_lm_2, ~ lang_group | q_type)
-past_con_2 <- contrast(past_emm_2, method = "pairwise") |> 
+past_emm <- emmeans(past_lm, ~ lang_group | q_type)
+past_con <- contrast(past_emm, method = "pairwise") |> 
   as_tibble() |>
   separate(contrast, c("group1", "group2"), " - ") |> 
   mutate(p.signif = cut(p.value,
@@ -277,36 +240,163 @@ past_con_2 <- contrast(past_emm_2, method = "pairwise") |>
                  # group = "q_type", 
                  # dodge = 0.9)
 
-# doesn't work; need to redefine past_mean
-past_pw_2 <- ggplot(data = past_mean_2) +
+past_pw <- ggplot(data = past_mean) +
   geom_col(aes(y = mean, x = lang_group, fill = s_variant),
            position = position_dodge()) +
   geom_errorbar(aes(ymin = lower_ci, ymax = upper_ci, 
                     x = lang_group, group = s_variant),
                 width = 0.3,
                 position = position_dodge(width = 0.9)) +
-  stat_pvalue_manual(past_con_2,
-                     y.position = 1.1 * max(past_mean_2$mean),
+  stat_pvalue_manual(past_con,
+                     y.position = 1.1 * max(past_mean$mean),
                      step.increase = 0.2,
                      tip.length = 0.03,
                      hide.ns = T) +
   labs(x = "Language group", y = "Mean rating") +
   scale_fill_manual(name = "Sentence type",
                     labels = c("With past marking", "Without past marking"),
-                    values = c("lightsalmon", "lightslateblue"))
+                    values = c("lightsalmon", "lightslateblue")) +
+  theme(legend.position = "bottom")
 
-past_pw_2
+past_pw
 ```
 
-```{r}
-# exploratory analysis involving verbal semantics
+## Past tense marking---event aspect
+
+As past marking type was not a significant predictor of ratings for sentences involving the past tense construction, we conducted an exploratory analysis to determine whether there were other possible predictors that would explain the variation observed in participants' responses to different past tense items.
+One candidate was the aspect of the event semantics, which was noted by @hoDynamicsContactContinuum1993 to also influence the proportion of past marking.
+Specifically, they found that verbs which were telic showed the highest proportion of past marking, followed by stative verbs, followed by atelic verbs.[^03-04] 
+To explore the role of event semantics in past tense marking, we evaluated each sentence in terms of the aspectual features of the event described: dynamic or stative, durative or punctual, and telic or atelic ###CITATIONS HERE: DOWTY, VENDLER, OLSEN.
+Using these features, we classified each sentence into aspectual classes: accomplishment ([+dynamic, +durative, +telic]), achievement ([+dynamic, -durative, +telic]), activity ([+dynamic, +durative, -telic]), or state ([-dynamic, +durative, -telic]).[^03-05] 
+It is important to emphasise that this set of analyses is exploratory and post-hoc; as such, the number and order of presentation of sentences of different aspectual classes was not balanced within participants.
+A histogram of the number of sentences of each aspectual class is shown in Figure \@ref(fig:past-sem-hist).
+
+[^03-04]: Note that in @hoDynamicsContactContinuum1993, they used the terms "punctual" and "non-punctual", but in fact the criterion used to distinguish between these two categories is explicitly characterised as the former category having the feature [+telic] or [+completive].
+
+[^03-05]: Other classes such as semelfactives ([+dynamic, -durative, -telic]) were not present among the sentences in our questionnaire.
+
+(ref:past-sem-hist) Histogram of aspectual classes of past tense constructions.
+```{r past-sem-hist, out.width="100%", fig.cap="(ref:past-sem-hist)"}
+semantics <- read_csv(here("data", "past_semantics.csv"))
+past_sem <- past |> 
+  left_join(semantics |> select(question, dynamic, durative, telic, aspectual_class),
+            by = "question") |> 
+  mutate(aspectual_class = aspectual_class |> as.factor() |> `contrasts<-`(value = contr.sum(4) * 0.5))
+
+past_sem_lm <- lmer(value ~ q_type * lang_group * aspectual_class + 
+                 (1 | ResponseId) + (1 | s_label),
+               data = past_sem)
+
+past_sem_sum <- past_sem_lm |> tidy()
+
+semantics_hist <- semantics |> 
+  count(aspectual_class) |> 
+  mutate(n = n / 2)
+
+past_sem_hist <- ggplot(semantics_hist) +
+  geom_col(aes(x = aspectual_class, y = n), fill = "cornflowerblue") +
+  scale_x_discrete(labels = c("Accomplishment", "Achievement", "Activity", "State")) +
+  labs(x = "Event aspectual class", y = "Count")
+
+past_sem_hist
 ```
 
+Participants' ratings for past tense constructions by aspectual class are shown in Figure \@ref(fig:past-sem-plot).
+We conducted a linear regression with rating as the outcome variable, and aspectual class, sentence version, and MT as fixed effects with sum contrasts, along with all interactions. 
+We also included participant and item as random effects.
+The full model specification is as follows: `rating ~ aspectual_class * sent_version * mt + (1 | ppt_id) + (1 | item_id)`.[^03-03]
+
+(ref:past-sem-plot) Distributions of ratings for past tense constructions by event aspect, sentence version, and MT. Black dashed lines indicate means. C: Chinese; M: Malay.
+```{r past-sem-plot, out.width="100%", fig.cap="(ref:past-sem-plot)"}
+past_sem_mean <- past_sem |> 
+  group_by(aspectual_class, s_variant) |> 
+  summarise(mean = mean(value),
+            sd = sd(value),
+            count = n()) |> 
+  mutate(se = sd / sqrt(count),
+         lower_ci = mean - se,
+         upper_ci = mean + se)
+
+past_sem_prop <- past_sem |> 
+  group_by(aspectual_class, s_variant, lang_group) |> 
+  count(value) |> 
+  ungroup(lang_group) |> 
+  mutate(freq = n / sum(n))
+
+past_sem_lab <- labeller(
+  s_variant = c("a" = "With past marking", "b" = "Without past marking"), 
+  aspectual_class = Hmisc::capitalize)
+
+past_sem_plot <- ggplot(data = past_sem_prop) +
+  geom_bar(aes(x = value, y = freq, fill = lang_group), stat = "identity") +
+  geom_vline(aes(xintercept = mean), data = past_sem_mean, lty = "dashed") +
+  facet_grid(aspectual_class ~ s_variant, labeller = past_sem_lab) +
+  labs(x = "Rating", y = "Frequency") +
+  scale_fill_brewer(palette = "Set2", name = "MT")
+
+past_sem_plot
+```
+
+Model results suggested that there was again a main effect of sentence version ($b =$ `r past_sem_sum |> filter(term == "q_type1") |> pull(estimate)`, $p =$ `r past_sem_sum |> filter(term == "q_type1") |> pull(p.value)`), and an interaction effect between sentence version and MT ($b =$ `r past_sem_sum |> filter(term == "q_type1:lang_group1") |> pull(estimate)`, $p =$ `r past_sem_sum |> filter(term == "q_type1:lang_group1") |> pull(p.value)`).
+Additionally, there was an interaction effect among sentence version, MT, and event aspectual class, as shown in Figure \@ref(fig:past-sem-pairwise). 
+Post-hoc pairwise comparisons using the Tukey method revealed that there were no significant pairwise contrasts for sentences with past tense marking (all $p >$ `r past_sem_con |> filter(q_type == 1) |> pull(p.value) |> min() |> floor_dec(1)`). 
+For sentences without past tense marking, there were no significant pairwise contrasts for Malay MT speakers (all $p >$ `r past_sem_con |> filter(q_type == 2, lang_group == "M") |> pull(p.value) |> min() |> floor_dec(1)`). 
+However, for Chinese MT speakers, sentences with unmarked past activities (`r past_sem_emm_tidy |> filter(q_type == 2, lang_group == "C", aspectual_class == "activity") |> pull(estimate)` $\pm$ `r past_sem_emm_tidy |> filter(q_type == 2, lang_group == "C", aspectual_class == "activity") |> pull(std.error)`) had higher ratings than sentences with unmarked past states (`r past_sem_emm_tidy |> filter(q_type == 2, lang_group == "C", aspectual_class == "state") |> pull(estimate)` $\pm$ `r past_sem_emm_tidy |> filter(q_type == 2, lang_group == "C", aspectual_class == "state") |> pull(std.error)`, $b =$ `r past_sem_con |> filter(q_type == 2, lang_group == "C", group1 == "activity", group2 == "state") |> pull(estimate) |> abs()`, $p =$ `r past_sem_con |> filter(q_type == 2, lang_group == "C", group1 == "activity", group2 == "state") |> pull(p.value)`). 
+
+(ref:past-sem-pw) Mean ratings for past tense marking by event aspectual class and sentence version. \*: $p < .05$.
+```{r past-sem-pairwise, out.width="100%", fig.cap="(ref:past-sem-pw)"}
+past_sem_emm <- emmeans(past_sem_lm, ~ aspectual_class | q_type * lang_group)
+past_sem_emm_tidy <- past_sem_emm |> tidy()
+past_sem_con <- contrast(past_sem_emm, method = "pairwise", adjust = "tukey") |> 
+  as_tibble() |>
+  separate(contrast, c("g1", "g2"), " - ") |> 
+  mutate(group1 = pmin(g1, g2),
+         group2 = pmax(g1, g2),
+         p.signif = cut(p.value,
+                        breaks = c(-Inf, .0001, .001, .01, .05, .1, 1),
+                        labels = c("****", "***", "**", "*", "ns", "ns"))) |> 
+  select(-g1, -g2) |> 
+  arrange(q_type, group2) |> 
+  add_x_position(x = "aspectual_class", 
+                 group = "q_type", 
+                 dodge = 0.9)
+
+past_sem_mean_2 <- past_sem |> 
+  group_by(aspectual_class, s_variant, lang_group) |> 
+  summarise(mean = mean(value),
+            sd = sd(value),
+            count = n()) |> 
+  mutate(se = sd / sqrt(count),
+         lower_ci = mean - se,
+         upper_ci = mean + se)
+
+past_sem_pw <- ggplot(data = past_sem_mean_2) +
+  geom_col(aes(y = mean, x = aspectual_class, fill = s_variant),
+           position = position_dodge()) +
+  geom_errorbar(aes(ymin = lower_ci, ymax = upper_ci, 
+                    x = aspectual_class, group = s_variant),
+                width = 0.3,
+                position = position_dodge(width = 0.9)) +
+  facet_grid(lang_group ~ .) +
+  stat_pvalue_manual(past_sem_con,
+                     y.position = 1.1 * max(past_sem_mean$mean),
+                     step.increase = 0.2,
+                     tip.length = 0.03,
+                     hide.ns = T) +
+  labs(x = "Event aspectual class", y = "Mean rating") +
+  scale_fill_manual(name = "Sentence type",
+                    labels = c("With past tense marking", "Without past tense marking"),
+                    values = c("lightsalmon", "lightslateblue")) +
+  scale_x_discrete(labels = c("Accomplishment", "Achievement", "Activity", "State")) +
+  theme(legend.position = "bottom")
+
+past_sem_pw
+```
 
 ## Individual differences
 
 To better understand the observed variation in responses, we conducted two further exploratory analyses.
-The first analysis involved understanding the relationship in participants' responses to the two types of constructions studied: were participants who rated CSE copula constructions more highly also more likely to rate CSE past tense constructions more highly?
+The first analysis involved understanding the relationship in participants' responses to the two types of constructions studied: were participants who rated CSE copular constructions more highly also more likely to rate CSE past tense constructions more highly?
 We calculated the mean and 95% confidence intervals for both types of CSE constructions for each participant, shown in Figure \@ref(fig:cor).
 
 (ref:cor) Ratings for copula and past tense CSE constructions by participant. Error bars indicate 95% confidence intervals.
@@ -336,19 +426,19 @@ both_plot <- ggplot(both,
                 alpha = .5) +
   geom_smooth(method = "lm") +
   geom_abline(slope = 1, intercept = 0, lty = "dashed") +
-  labs(x = "Copula construction rating",
+  labs(x = "Copular construction rating",
        y = "Past tense construction rating")
 
 both_plot
 ```
 
 The correlation in means between the two types of CSE constructions was moderate, $r =$ `r both_cor`, suggesting that participants sometimes (but not always) endorsed both types of CSE constructions with similar ratings.
-Additionally, many of the points lay above the $y = x$ line, suggesting that participants generally rated the CSE past tense constructions higher than the CSE copula constructions.
+Additionally, many of the points lay above the $y = x$ line, suggesting that participants generally rated the CSE past tense constructions higher than the CSE copular constructions.
 
 The second analysis studied the relationship between participants' ratings and their self-assessed MT language proficiency.
 A histogram of participants' MT proficiencies is shown in Figure \@ref(fig:prof-hist).
 
-(ref:prof-hist): Histogram of participants' self-assessed MT language proficiency by MT. C: Chinese; M: Malay.
+(ref:prof-hist) Histogram of participants' self-assessed MT language proficiency by MT. C: Chinese; M: Malay.
 ```{r prof-hist, out.width="100%", fig.cap="(ref:prof-hist)"}
 ppts <- data_tib |> 
   filter(lang_group != "O") |> 
@@ -386,7 +476,7 @@ prof_lm <- lmer(value ~ test_phen * q_type * lang_group * proficiency_std +
 prof_sum <- prof_lm |> tidy()
 ```
 
-(ref:prof-plot): Ratings for copula and past tense constructions by participants' self-assessed MT language proficiency, sentence version, and MT. C: Chinese; M: Malay.
+(ref:prof-plot) Ratings for copula and past tense constructions by participants' self-assessed MT language proficiency, sentence version, and MT. C: Chinese; M: Malay.
 ```{r prof-plot, out.width="100%", fig.cap="(ref:prof-plot)"}
 # proficiency by rating
 phen_labeller <- function(value) {

@@ -1,11 +1,11 @@
 # Discussion
 
 Using acceptability judgements from Chinese and Malay MT speakers, we found that ratings for different sentences varied across constructions, complement or past tense type, and individual speakers.
-Specifically, for copula constructions, ratings for PP complements were higher than ratings for NP or AP complements when the copula was absent.
+Specifically, for copular constructions, ratings for PP complements were higher than ratings for NP or AP complements when the copula was absent.
 For past tense constructions, the difference in ratings between marked and unmarked past tense constructions was larger for Malay speakers than Chinese speakers.
 Finally, speakers with greater Chinese proficiency rated both SSE and CSE sentences more highly than speakers with lower proficiency, whereas speakers with greater Malay proficiency rated CSE sentences more highly but SSE sentences more poorly than speakers with lower proficiency.
 
-These results suggest that MT has no effect on acceptability ratings of copula constructions in CSE speakers.
+These results suggest that MT has no effect on acceptability ratings of copular constructions in CSE speakers.
 This contrasts with earlier work from @plattVariationImplicationalRelationships1979, which suggests that there were greater differences in the copula use of Chinese- and Malay-speaking Singaporeans in the 1970s.
 In comparison, the data in the present study suggest that much of the difference has been eliminated in contemporary CSE, indicating levelling of variability.
 Thus, it is likely that the continued interactions between Chinese and Malay speakers, as well as increased standardisation and amount of education, have resulted in the levelling of syntactic variation between the two groups.
