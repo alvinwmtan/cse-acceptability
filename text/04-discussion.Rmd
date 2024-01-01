@@ -2,9 +2,6 @@
 
 Using acceptability judgements from Chinese and Malay MT speakers, we found that ratings for different sentences varied across constructions, complement or past tense type, and individual speakers.
 Specifically, for copular constructions, ratings for PP complements were higher than ratings for NP or AP complements when the copula was absent.
-For past tense constructions, the difference in ratings between marked and unmarked past tense constructions was larger for Malay speakers than Chinese speakers.
-Finally, speakers with greater Chinese proficiency rated both SSE and CSE sentences more highly than speakers with lower proficiency, whereas speakers with greater Malay proficiency rated CSE sentences more highly but SSE sentences more poorly than speakers with lower proficiency.
-
 These results suggest that MT has no effect on acceptability ratings of copular constructions in CSE speakers.
 This contrasts with earlier work from @plattVariationImplicationalRelationships1979, which suggests that there were greater differences in the copula use of Chinese- and Malay-speaking Singaporeans in the 1970s.
 In comparison, the data in the present study suggest that much of the difference has been eliminated in contemporary CSE, indicating levelling of variability.
@@ -20,17 +17,15 @@ A natural extension for further research would thus be to collect acceptability 
 Interestingly, for past tense constructions, we observed an interaction between sentence version and MT, such that Malay speakers had larger differences in ratings between SSE and CSE sentences than Chinese speakers.
 This effect was not observed by @hoDynamicsContactContinuum1993, who did not analyse past tense marking as a function of MT.
 As we did not find any simple main effects related to this interaction effect, it is difficult to pinpoint the source of this disparity.
-- Speculate? How to disentangle? -> wait for exploratory analysis
+However, exploratory analyses suggested that Chinese speakers rated unmarked activities higher than unmarked states, which was in the same direction as the pattern of production found by @hoDynamicsContactContinuum1993.
+The present study did not have a full combinatorial set of sentences covering different past marking types and event aspectual classes, and a more comprehensive survey may be required to better characterise the acceptability of unmarked past tense constructions in CSE.
 
-
-individual differences -> variation in the bundles of CSE features which speakers adopt
-proficiency -> note that MT proficiency may be inversely related to English proficiency, but we're not sure
-conclusion about importance of using acceptbility judgements to reveal more nuanced variation
-
-
-
-
-
+Our questionnaire also demonstrated variation across individual respondents.
+Participants' responses to copular constructions were moderately correlated with their responses to past tense constructions, suggesting that CSE features are often bundled together, but not tightly---speakers may sometimes accept or even adopt different features to differing extents.
+Speakers' responses were also related to their self-assessed MT proficiency in an interesting pattern of responses.
+As may be expected, speakers with greater MT proficiency tended to rated CSE sentences more highly, as their MT language may exert a larger influence on their CSE.
+However, Chinese and Malay speakers showed opposite patterns of responses for SSE sentences, as Malay speakers with greater MT proficiency rated SSE sentences more poorly, whereas Chinese speakers tended to rate them more highly.
+These results are perhaps due to speakers' differing SSE proficiencies, which may have complex interactions with speakers' MT proficiencies; a general survey of Singaporeans' self-rated proficiencies across all of the languages that they speak may be insightful in this regard.
 
 ## Limitations and future work
 One inadvertent limitation of the main study is participant distribution.
@@ -45,9 +40,14 @@ All three complement types had a mean rating of $> 4$ and a skew of $< −1$, su
 However, this result is unsurprising given that SSE is the primary medium of education in schools, and is often considered the prestigious or 'correct' variety, thus there is little reason for participants to score SSE sentences poorly (other than possible 'stiltedness' if they felt they were unlikely to use such sentences in ordinary CSE speech).
 Nonetheless, future research in this area may employ alternative study designs focusing exclusively on CSE sentences, which may eliminate this problem.
 
-<!-- This section needs to be rewritten slightly -->
-Finally, only 3\textsc{sg} subjects were used as the focus was on the effect of complement types, thus the results may not be generalisable to other types of subjects.
+Additionally, only 3\textsc{sg} subjects were used for copular constructions as the focus was on the effect of complement types, thus the results may not be generalisable to other types of subjects.
 Research by @hoDynamicsContactContinuum1993 suggests that the preceding environment does have an effect on copula use, with 1\textsc{sg} and 3\textsc{sg} pronouns promoting copula use, and other pronouns and NPs promoting a zero copula.
 The use of both 3\textsc{sg} pronominal and NP subjects in this study seems to cover both directions of influence of the preceding environment, although a broader study investigating the effects of other subjects may provide a more comprehensive description of copula optionality in CSE.
 
+Finally, as mentioned above, the presentation of the stimuli via the visual modality may have limited their naturalness, given that CSE is much more often encountered aurally, and does not have a codified written form.
+This may have been particularly important for studying past tense marking, which is related to the phonetics of the past tense forms; indeed, it is plausible that CSE speakers have slightly different written and phonetic representations of past tense forms, leading to differential performance in the two modalities.
+While using auditory stimuli is inherently much more complicated, due to having to control for aspects of the speaker's voice (e.g., gender, accent), it may elicit more accurate responses from respondents, and therefore permit finer-grained descriptions of CSE.
 
+Nonetheless, the results as whole demonstrate substantial nuance in participants' endorsement of SSE and CSE sentences.
+They also highlight the importance of acceptability judgements as a tool to understand the syntax of a particular variety, especially for cases with known variation across speakers, whether sociolinguistic or otherwise.
+In conjunction with other approaches such as corpus and theoretical analyses, such an empirical approach will allow for more accurate and detailed descriptions of language as it is used by speakers.

@@ -23,11 +23,11 @@ affiliation:
     institution   : "University of Oxford"
 
 authornote: |
-  Alvin W.M. Tan, Faculty of Linguistics, Philology, and Phonetics, University of Oxford, ORCID 0000-0001-5551-7507.
+  Alvin Wei Ming Tan, Faculty of Linguistics, Philology, and Phonetics, University of Oxford, ORCID 0000-0001-5551-7507.
   
   Louise Mycock, Faculty of Linguistics, Philology, and Phonetics, University of Oxford, ORCID 0000-0003-3473-0979.
   
-  Alvin W.M. Tan is now at Department of Psychology, Stanford University.
+  Alvin Wei Ming Tan is now at Department of Psychology, Stanford University.
 
 abstract: |
   One or two sentences providing a **basic introduction** to the field,  comprehensible to a scientist in any discipline.
@@ -92,7 +92,8 @@ extrafont::loadfonts()
 theme_set(theme_bw())
 theme_update(panel.grid = element_blank(),
              strip.background = element_blank(),
-             legend.key = element_blank())
+             legend.key = element_blank(),
+             legend.position = "bottom")
 ```
 
 ```{r analysis-preferences}
@@ -109,6 +110,9 @@ floor_dec <- function(x, level=1) round(x - 5*10^(-level-1), level)
 ```
 
 ```{r child = "text/03-results.Rmd"}
+```
+
+```{r child = "text/04-discussion.Rmd"}
 ```
 
 <!--questionnaire, demographics, pilot study-->
