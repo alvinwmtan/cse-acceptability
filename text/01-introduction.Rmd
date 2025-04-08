@@ -1,47 +1,230 @@
-Contact languages as an insight into language change and sociolinguistics
-Description of CSE
+# Introduction
+Singapore English (SgE) is a contact variety spoken in Singapore, with substrate languages and dialects including Chinese[^01-chinese] and Malay[^01-malay].
+It is spoken by most Singaporeans, the majority of whom are also bi- or multilingual, in part due to bilingual education. 
+Students are required to learn both English and another language, termed a "mother tongue" (MT), which is typically related to the student's ethnicity: ethnic Chinese students learn Mandarin, ethnic Malay students learn Malay, and ethnic Indian students learn an Indian language (e.g., Tamil, Hindi, Punjabi) [@pakirBilingualEducationEnglish1999].
+SgE includes a range of subvarieties, with the acrolect termed Standard Singapore English (SSE) and the basilect termed Colloquial Singapore English (CSE; also commonly known as Singlish). 
+The continued coexistence of these subvarieties has led to a number of proposed approaches to the role of CSE in Singapore, including 'continuum' [@plattSingaporeEnglishSpeech1975] and 'diglossia' [@guptaSituationEnglishSingapore1998], inter alia. 
+Perhaps the most helpful model for understanding CSE and CSE variation is Leimgruber's indexical approach [@leimgruberSingaporeEnglishStructure2013], according to which linguistic variables index social positions (e.g., formality, emotion, socioeconomic aspirations) and speakers select features that appropriately indicate their desired stance rather than necessarily adopting an entire set of features associated with CSE or SSE. 
 
+[^01-chinese]: Our use of "Chinese" here is intentionally imprecise. When referring to an ethnic group, it denotes people of Chinese descent, but when referring to language, we use it as a term covering various Sinitic varieties spoken in Singapore, including Mandarin, Hokkien, Cantonese, and Teochew, among others, as they share relevant syntactic characteristics. Our subsequent analyses of Chinese varieties will focus on (Mainland China) Mandarin as a representative example; Singaporean varieties are mostly similar on matters of syntax.
 
+[^01-malay]: Similarly, our use of "Malay" is also imprecise, referring both to a broad ethnic group, as well as a term for the Malay macrolanguage, which includes varieties spoken in Indonesia and Malaysia as well as Singapore.
 
+Under this model, it is possible to describe CSE features without presuming that they must always co-occur within any particular utterance.
+Instead, one should expect variation in the usage of CSE features by speakers of SgE, and in particular, sociolinguistic factors are likely to be important predictors of variation.
+In order to capture the natural variation in SgE, researchers have often turned to recordings of naturalistic speech or corpus analyses as methods to understand the distribution of different features of SgE [e.g., @deterdingTensesWillWould2003; @hoDynamicsContactContinuum1993; @laiOPTionalPhenomenonSingapore2013; @leimgruberSingaporeEnglishStructure2013].
+The ecologically valid context of these approaches has been crucial in capturing SgE as it is actually used, and has generated rich data which can be analysed along many different dimensions.
 
-CSE, like SSE, has the copula be. Unlike SSE, however, CSE also permits a zero copula, exemplified in (44), adapted from [@changCopulaDeletionColloquial2009].
-(44) a. Today ∅ [NP Saturday].
-b. Tom ∅ [AP clever].
-c. Tom ∅ [PP at home].
+However, as is the case with any investigation using naturalistic data, these approaches have certain limitations.
+Firstly, because of the difficulty of collecting and processing direct recordings, naturalistic studies often employ relatively small sample sizes, limiting the generalisability of the results.
+This has been mitigated by the recent development of a large-scale spoken SgE corpus [@kohBuildingSingaporeEnglish2019], which is likely to enable more accurate descriptions of feature distributions across SgE speakers.
+Nonetheless, there remains variation in the number of times any particular target phenomenon may occur within one participant's speech, and lower frequency phenomena may remain more difficult to study; this is related to the "negative data problem", which is the observation that constructions which do not appear in a corpus may not be ungrammatical, merely unattested [@bennettUsingCorporaLanguage2010].
+Secondly, in naturalistic settings, there is no way to control for the influence of many other factors, especially pragmatic, discourse, and other contextual information.
+These affect the kind of language that may be appropriate for speakers to use, and in the particular case of SgE, the indexical approach suggests that speakers flexibly modulate the features they express in their speech depending on many of these background factors [@leimgruberSingaporeEnglishStructure2013].
+As such, it is difficult to characterise CSE features and their distribution while controlling for such extraneous factors.
+
+A complementary methodology that addresses some of these issues is the use of formal acceptability judgements. 
+This method involves explicit collection of acceptability ratings for various constructions from native speakers, and allows for systematic capture of particular phenomena that may not be possible with naturalistic data.
+Additionally, formal acceptability judgements collected from a larger number of individuals permit the analysis of variation across individuals, and also decrease the potential magnitude of biases that can occur with informal acceptability judgements that are the result of the researcher's own introspection or that represent the responses of a small number of informants [@juzekAcceptabilityJudgementTasks2015].
+Currently, formal acceptability judgements as data are gaining traction in linguistics research, but there are still relatively few instances of their application with respect to populations with known sociolinguistic variation, including SgE.
+A search for the terms "Singapore(an) English" and "acceptability judg(e)ment" in Google Scholar returned only 5 results that were true formal acceptability judgement tasks [@chanAfterthoughtsRightDislocation2023; @horschComparativeCorrelativeConstruction2022; @leongColloquialSingaporeEnglish2013; @liConstructionSingaporeanEnglish2015; @terassaMorphologicalSimplificationAsian2019].[^01-01]
+
+[^01-01]: There were a number of other studies which used participants' _process_ of generating acceptability judgements as a way to measure their linguistic attitudes and language ownership, rather than as a way to characterise SgE [@bokhorst-hengEnglishLanguageOwnership2007; @bokhorst-hengWhoseEnglishLanguage2010; @fooLinguisticInsecurityLinguistic2019; @higginsOwnershipEnglishOuter2003; @rubdyEnactingEnglishLanguage2008]. 
+There was also an additional study which technically did use an acceptability judgement task, but only with a small number of advanced linguistic students [@satoWhQuestionsColloquialSingapore2013], which would again potentially limit the generalisability of the results.
+
+Hence, the current study sought to explore the use of formal acceptability judgements as a means of understanding the distribution of CSE features among SgE speakers.
+In particular, we investigated the relationship between linguistic and demographic variables as a window into sociolinguistic variation in SgE.
+To do so, we chose two well-attested CSE features, namely the zero copula and uninflected past tense.
+Both of these features have observed optionality, and we examined how their acceptability varied with linguistic (e.g., phonetic, syntactic, or semantic) features of the stimuli, as well as with participants' language backgrounds (languages spoken and language proficiencies).
+In the remainder of the introduction, we provide a brief overview of the two phenomena of interest.
+
+## Copular constructions in Singaporean languages
+### Copular constructions in SSE
+In SSE, as in many other varieties of English, the copula is _be_ and is obligatory in copular constructions, as in \@ref(ex:sse-ex).
+
+```{=latex}
+\ex.\label{ex:sse-ex} \a.\label{ex:sse-np} Today is {[}\textsubscript{NP} Saturday{]}.
+\b.\label{ex:sse-ap} Tom is {[}\textsubscript{AP} very tall{]}. 
+\c.\label{ex:sse-pp} Sally is {[}\textsubscript{PP} at home{]}.
+```
+
+### Copular constructions in Chinese
+In Chinese, the ordinary copula is _是 shì_. Similar to other constructions in this isolating language, this does not inflect for tense, number, or person (unlike be in English). _是 shì_ is typically used with NP complements, as in \@ref(ex:zho-np); with most NP complements, the copula is obligatory.[^01-zho-np-opt]
+
+```{=latex}
+\ex.\glll\label{ex:zho-np}约翰 *(是) (个) 医生。\\
+yuēhàn *(shì) (gè) yīshēng.\\
+John \textsc{cop} \textsc{clf} doctor\\
+``John is a doctor.''
+```
+
+[^01-zho-np-opt]: Some NP complements seem to license constructions without a copula as informal responses to questions, such as time and price [@changCopulaDeletionColloquial2009], and some varieties may also permit predicative nominals without the copula [@tangNominalPredicationFocus2001], but these tend to be exceptions and are generally less acceptable than their counterparts with an overt copula. We assume that the general case involves an obligatory copula, and that other pragmatic factors permit copula-less forms.
+
+On the other hand, AP predicatives[^01-zho-adj] disallow the copula in Chinese, except with emphatic or focus marking, as in \@ref(ex:zho-ap).
+
+```{=latex}
+\ex.\glll\label{ex:zho-ap}他 $\emp$ 很 开心。\\ 
+tā $\emp$ hěn kāixīn.\\ 
+\textsc{3sg.m} ~ \textsc{pos} happy\\ 
+``He is happy.''
+```
+
+[^01-zho-adj]: The ability of adjectives to function as clausal predicates has led to suggestions that they should be considered intransitive stative verbs rather than a separate word class [@mccawleyJustifyingPartofSpeechAssignments1992]. However, distributional analyses have suggested that the adjective does indeed form a separate word class in Chinese [@paulRehabilitationMuchOstracized2010; @arcodiaChineseAdjectiveWord2014], and we take this view in subsequent analyses.
+
+Locative expressions in Chinese require the word _在 zài_, as in \@ref(ex:zho-pp). This word does not co-occur with _是 shì_ except when the latter is used as a focus marker [@xuFocusMarkingChineseMalay2003].
+
+```{=latex}
+\ex.\glll\label{ex:zho-pp}我 *(在) 厨房 里。\\ 
+wǒ *(zài) chúfáng lǐ.\\ 
+\textsc{1sg} \textsc{loc} kitchin in\\ 
+``I am in the kitchen.''
+```
+
+We assume that _在 zài_ can be considered a locative copula, given that it is needed to define the predication structure for PPs [@archeMainQuestionsStudy2019; see @rossCoverbsCategoryDistinctions1991; @sharmaAAVECreoleCopula2009].[^01-zho-p]
+
+[^01-zho-p]: There is disagreement about whether the complement of _在 zài_ is an NP or a PP, related to whether locative words such as _里 lǐ_ 'in' and _上 shàng_ 'on' are nouns [e.g., @mccawleyJustifyingPartofSpeechAssignments1992] or postpositions [e.g., @djamouriPostpositionsVsPrepositions2013]. We follow @liOrderConstituencyMandarin1990 in analysing such locative words as postpositions, although the analysis would not diﬀer significantly were they to be analysed as nouns.
+
+In summary, Chinese copular constructions with an NP predicative require the copula _是 shì_, those with an AP predicative do not have a copula, and those with a PP predicative require the locative copula _在 zài_.
+
+### Copular constructions in Malay
+In prescribed rules of Standard Malay, NP predicatives can appear either with or without the copula _ialah_ [@niksafiahkarimTatabahasaDewan1989], as in \@ref(ex:mal-np); most of the examples in this section are adapted from [@moeljadiBasicCopulaClauses2016] except where otherwise noted. 
+
+```{=latex}
+\exg.\label{ex:mal-np}Budi (ialah) guru.\\ 
+Budi \textsc{cop} teacher\\ 
+``Budi is a teacher.''
+```
+
+When considering actual use of Malay, however, the copula _adalah_ is also observed with NP complements [@khairultaufiqabubakarKataPemeriIalah2017, @iwayanarkaNonverbalPredicatesAustronesian2013]. The two copulas do not seem to diﬀer semantically [@moeljadiBasicCopulaClauses2016], although a corpus study revealed that _ialah_ appears much more frequently with NP predicatives than other types of predicatives (73.8% of occurrences) as compared to _adalah_ (59.3% of occurrences) [@khairultaufiqabubakarKataPemeriIalah2017]. A final note about Malay NP predicatives is that they behave diﬀerently to other copular predicatives, as they require an inchoative copula (_menjadi_ 'become') in the future tense (unlike AP and PP predicatives), as in \@ref(ex:mal-np-fut) [@iwayanarkaNonverbalPredicatesAustronesian2013].
+
+```{=latex}
+\exg.\label{ex:mal-np-fut}Dia akan *(menjadi) dokter.\\ 
+\textsc{3sg} \textsc{fut} become doctor\\ 
+``He/she will become a doctor.''
+```
+
+While an analysis of this verb is outside the scope of the present study, it suggests that NPs have a greater tendency to occur with a copula than other types of complements in Malay (at least in some contexts).
+
+On the other hand, prescriptive grammars for Standard Malay suggest that AP predicatives can appear either with or without the copula _adalah_ [@niksafiahkarimTatabahasaDewan1989], as in \@ref(ex:mal-ap), adapted from [@mustaffaSilentSyntacticStructures2018].
+
+```{=latex}
+\exg.\label{ex:mal-ap}Ros (adalah) merah.\\ 
+rose \textsc{cop} red\\ 
+``Roses are red''
+```
+
+Actual use shows again that, like NPs, AP predicatives can appear with _ialah_, although much less frequently [@khairultaufiqabubakarKataPemeriIalah2017]. However, speakers seem to disagree on the acceptability of either _ialah_ or _adalah_ appearing with AP predicatives [@moeljadiBasicCopulaClauses2016], thus it seems that AP predicatives strongly disfavour the presence of a copula.
+
+Locative expressions in Malay can optionally take an existential copula _ada_ or _berada_ [@moeljadiBasicCopulaClauses2016], as in \@ref(ex:mal-pp).
+
+```{=latex}
+\exg.\label{ex:mal-pp}Budi (ada/berada) di rumah.\\ 
+Budi \textsc{exist} at home\\ 
+``Budi is at home.''
+```
+
+Again, actual use reveals that both _adalah_ and _ialah_ are used with locative expressions [@khairultaufiqabubakarKataPemeriIalah2017]. This also applies for benefactive constructions, which (while not technically locative) also involve a preposition _untuk_ 'for', as in \@ref(ex:mal-ben).
+
+```{=latex}
+\exg.\label{ex:mal-ben}Ini (adalah/ialah) untuk Budi.\\ 
+this \textsc{cop} for Budi\\ 
+``This is for Budi.''
+```
+
+In summary, copular constructions in Malay can occur without a copula, with _adalah_, or with _ialah_. Furthermore, PP predicatives can optionally take an existential copula _(ber)ada_.
+
+### Copular constructions in CSE
+CSE, like SSE, has the copula _be_. 
+Unlike SSE, however, CSE also permits a zero copula (sometimes termed "copula omission" or "copula deletion"), exemplified in \@ref(ex:cse-ex), adapted from [@changCopulaDeletionColloquial2009].
+
+```{=latex}
+\ex.\label{ex:cse-ex} \a.\label{ex:cse-np} Today $\emp$ {[}\textsubscript{NP} Saturday{]}.
+\b.\label{ex:cse-ap} Tom $\emp$ {[}\textsubscript{AP} very tall{]}. 
+\c.\label{ex:cse-pp} Sally $\emp$ {[}\textsubscript{PP} at home{]}. 
+```
 
 A number of studies have examined the contexts in which the zero copula is licensed [@changCopulaDeletionColloquial2009; @hoDynamicsContactContinuum1993; @plattVariationImplicationalRelationships1979; @yuCopulalessNonverbalPredication2015]. 
-In particular, empirical data from the 1970s suggests that the distribution of the zero copula was affected by speakers’ L1 (Chinese or Malay)[^01-01]---Platt [@plattVariationImplicationalRelationships1979] found that Malay speakers had the zero copula most consistently with PPs, followed by APs and then NPs, while the rates for Chinese speakers were mostly equal (although slightly higher for APs), as shown in Figure 2.2. 
-In their analysis of Platt’s data, Sharma and Rickford [@sharmaAAVECreoleCopula2009] suggest that the difference in distributions may be due to the influence of copular constructions in the L1s: 
+In particular, empirical data from the 1970s suggests that the distribution of the zero copula was affected by speakers' L1 (Chinese or Malay)[^01-02]---@plattVariationImplicationalRelationships1979 found that Malay speakers had the zero copula most consistently with PPs, followed by APs and then NPs, while the rates for Chinese speakers were mostly equal (although slightly higher for APs). 
+In their analysis of Platt's data, @sharmaAAVECreoleCopula2009 suggested that the difference in distributions may have been due to the influence of copular constructions in the L1s: 
 "The greater absence of copulas in Malay may explain the higher frequencies of zero copula among Malay-medium students. 
 Similarly, the higher rate of omission with adjectival predicatives among Mandarin and Cantonese speakers learning English may derive from its parallel absence in their first languages." (p. 72)
+This suggestion arises from the observation that copulas are obligatory in Chinese for NP and PP complements (but disallowed for AP complements, except with emphatic or focus marking), whereas copulas are always optional in Malay [see @tanCopularConstructionsColloquial2020 for a more extensive discussion].
 
-[^01-01]: In Platt’s study, "L1 language" was based on the language medium of the schools attended by the informants (as there were Chinese- and Malay-medium schools prior to 1987). 
+[^01-02]: In Platt's study, "L1 language" was based on the language medium of the schools attended by the informants (as there were Chinese- and Malay-medium schools prior to 1987). 
 Additionally, complements labelled "PP" only included locatives, and not temporals or other types of PP construction.
 
-While this study has been seminal in CSE sociolinguistics, certain issues remain regarding zero copula distribution. 
-Firstly, the data were obtained through speaker recordings, thus there was no way to control for other factors such as adverbials and discourse particles, which contribute pragmatic information and are known to affect the acceptability of the zero copula [@changCopulaDeletionColloquial2009; @yuCopulalessNonverbalPredication2015]. 
-Secondly, the data were based on a relatively small sample of 3 Malay and 14 Chinese informants, thus the generalisability of the results is uncertain---for instance, the 100% rate of zero copula in PP complements for Malay speakers was based on only 5 tokens. 
+While this study has been seminal in CSE sociolinguistics, certain issues remain regarding zero copula distribution, including the issues mentioned above with using naturalistic data. 
+Specifically, the data were based on a relatively small sample of 3 Malay and 14 Chinese informants, thus the generalisability of the results is uncertain---for instance, the 100% rate of zero copula in PP complements for Malay speakers was based on only 5 tokens. 
+Additionally, there was no way to control for other factors such as adverbials and discourse particles, which contribute pragmatic information and are known to affect the acceptability of the zero copula [@changCopulaDeletionColloquial2009; @yuCopulalessNonverbalPredication2015]. 
 Finally, and most significantly, much has changed in the sociolinguistic landscape of Singapore since 1979, when this study was published. 
-The “Speak Mandarin Campaign” launched in 1979 encouraged Chinese Singaporeans to speak Mandarin instead of other Chinese varieties to unify the ethnic Chinese population, resulting in greater linguistic homogeneity among the Chinese.
-Furthermore, the introduction of the “national stream” in 1983 meant that all students were educated in English as their first language by 1987, with their MT as their second language. 
-Subsequent improvements in the quality and reach of education has meant that most current Singaporeans are effectively bilingual, and many would consider English to be their household language [cite Suzy Styles]; thus, “L1” is no longer a helpful term to designate the substrate languages of CSE, and “MT” is more relevant as a label for the languages other than English that Singaporeans are educated in, whether or not this is actually their “first” or “household” language.
-Thus, more research is necessary to isolate the effect of complement type, characterise the influence of the substrate languages on CSE, and determine its change and variation in the contemporary linguistic landscape of Singapore.
-
-
-
-
-
+The "Speak Mandarin Campaign" launched in 1979 encouraged Chinese Singaporeans to speak Mandarin instead of other Chinese "dialects" in order to unify the ethnic Chinese population, resulting in greater linguistic homogeneity among the Chinese.
+Furthermore, the introduction of the "national stream" in 1983 meant that all students were educated in English as the primary language of education by 1987, with their MT taught as their second language. 
+Subsequent improvements in the quality and reach of education have meant that most current Singaporeans are effectively bilingual, and many would consider English to be the primary language of their household [@woonLinguisticSoundSymbolism2018; @wuImpactBilingualismSkills2020]; thus, "L1" is no longer a helpful term to designate the substrate languages of CSE, and "MT" is more relevant as a label for the language(s) other than English in which Singaporeans are educated, whether or not this is actually their "first" or "household" language.
+These changes in the linguistic landscape suggest that more research is necessary to understand copular constructions in contemporary SgE. 
 
 More recent characterisations of CSE copular constructions have taken a more theoretical approach, focusing on possible origins of copula optionality [@ansaldoContactAsianVarieties2010; @changCopulaDeletionColloquial2009] and syntactic principles underlying constructional variation [@yuCopulalessNonverbalPredication2015]. 
-While these have provided detailed syntactic and sociolinguistic analyses of CSE copular constructions, they are limited in relying solely on the linguist’s intuitions, or possibly with a handful of informants. 
-Juzek [@juzekAcceptabilityJudgementTasks2015] has noted several issues with this approach:
-(45) a. Judgement errors: speakers’ judgements are subject to performance noise.
-b. Quantisation errors: speakers’ ‘inherent’ scales of grammaticality may not map perfectly onto the scales used.
-c. Purpose biases: speakers may alter their behaviour to accommodate the experimenter.
-d. Scale biases: the meaning of a scale may differ between speakers.
-e. Differences in grammars: speakers of the same language may have slightly different grammars.
-The relevance of these errors is immediately apparent when examining examples given in descriptions of CSE copular constructions. 
-For example, (46) is given by both Chang [@changCopulaDeletionColloquial2009] (p. 30) and Yu [@yuCopulalessNonverbalPredication2015] (p. 11); Chang considers it to be perfectly acceptable, while Yu marks it with ‘∗/?’, indicating that he considers it at least somewhat unacceptable.
-(46) Tom ∅ clever.
+While these have provided detailed syntactic and sociolinguistic analyses of CSE copular constructions, they are limited in relying solely on the linguist's intuitions, or possibly those of a handful of informants. 
+Issues with this approach are immediately apparent when examining examples given in descriptions of CSE copular constructions. 
+For example, \@ref(ex:cse-mix) is given by both Chang [@changCopulaDeletionColloquial2009] (p. 30) and Yu [@yuCopulalessNonverbalPredication2015] (p. 11); Chang considers it to be perfectly acceptable, while Yu marks it with '∗/?', indicating that he considers it at least somewhat unacceptable.
 
--> also, acceptability judgements are important when you know explicitly that there is variation in responses. Like in the case of CSE, which is a continuum, and different speakers lie at different points.
+```{=latex}
+\ex.\label{ex:cse-mix} Tom $\emp$ clever. 
+```
+
+Hence, a more thorough and nuanced description of the graded distribution of zero copula acceptability is needed to understand its standing as a feature of SgE.
+
+## Past tense constructions in Singaporean languages
+The presence of verbal inflection is another sociolinguistic variable in SgE.
+For example, past tense inflection is obligatory in SSE, as in \@ref(ex:sse-vp).
+
+```{=latex}
+\ex.\label{ex:sse-vp} \a.\label{ex:sse-supp} Yesterday, she went to the store.
+\b.\label{ex:sse-vwl} He took the bus home last week. 
+\c.\label{ex:sse-td} They packed up this morning. 
+```
+
+In contrast to English, verbs are not marked for tense in Chinese [@liuTenseAspectMandarin2015] or Malay [@winstedtMalayGrammar1913], as in \@ref(ex:zho-vwl) and \@ref(ex:mal-vwl) respectively.
+
+```{=latex}
+\ex.\glll\label{ex:zho-vwl}他 上 个 星期 搭 巴士 回家.\\ 
+tā shàng gà xīngqī dā bāshì huíjiā\\ 
+\textsc{3sg.m} previous \textsc{clf} week take bus return.home\\
+``He took the bus home last week.''
+```
+
+```{=latex}
+\exg.\label{ex:mal-vwl}Dia menaiki bas pulang minggu lepas.\\ 
+\textsc{3sg} take bus go.home week previous\\ 
+``He/she took the bus home last week.''
+```
+
+CSE allows optional past tense marking.
+Thus, the examples in \@ref(ex:cse-vp) are permissible; these examples involve the non-finite form of the verb instead of the corresponding verb with past inflection.
+
+```{=latex}
+\ex.\label{ex:cse-vp} \a.\label{ex:cse-supp} Yesterday, she go to the store.
+\b.\label{ex:cse-vwl} He take the bus home last week. 
+\c.\label{ex:cse-td} They pack up this morning. 
+```
+
+This optionality is highlighted by variable past tense marking even within a single utterance, as shown in \@ref(ex:cse-mix).
+
+```{=latex}
+\ex.\label{ex:cse-var} \a. We went in, take half an hour to come out. (Fong, 2004)
+\b. They never say the date, he didn't state the duration, right. (Leimgruber, 2013) 
+```
+
+More generally, CSE speakers exhibit substantial intra- and inter-utterance variability in past tense inflection [@deterdingSingaporeEnglish2007; @leimgruberSingaporeEnglishStructure2013].
+However, this variability does not appear to be entirely random or arbitrary; instead, there may be patterns in the likelihood of past tense marking [@cruz-ferreiraTenseSuffixesOther2005; @deterdingSingaporeEnglish2007; @fongVerbalCluster2004; @gutTenseMarkingSingapore2009; @hoDynamicsContactContinuum1993].
+Empirical data [from @hoDynamicsContactContinuum1993; @cruz-ferreiraTenseSuffixesOther2005; @gutTenseMarkingSingapore2009; @leongSociolinguisticFactorsAffecting2021 i.a.] have suggested that there are patterns in the likelihood of past tense marking, such that verbs whose past form ends in a consonant cluster (e.g., _picked_) are less likely to be inflected, whereas verbs whose past forms involve a vowel change (e.g., _fell_) are more likely to be inflected.
+This may be due to a number of (non-exclusive) factors.
+First, final consonant clusters tend to be reduced in SgE [@cruz-ferreiraTenseSuffixesOther2005; @deterdingSingaporeEnglish2007; @limSoudingSingaporean2004]; thus, past forms ending in consonant clusters may simply be reduced to the stem form without the final [t]/[d].
+Notably, however, omission of final [t]/[d] appears to be more frequent in other lexical words in comparison to the regular past _-ed_ morpheme [@cruz-ferreiraTenseSuffixesOther2005; @deterdingSingaporeEnglish2007].
+Second, irregular past forms (including those involving a vowel change) tend to be more frequent [@gutTenseMarkingSingapore2009; @liebermanQuantifyingEvolutionaryDynamics2007], which may help to preserve the marked form.
+Nonetheless, even accounting for morphophonological effects, individual verbs still vary substantially in their likelihoods of being inflected for past tense [@hoDynamicsContactContinuum1993].
+
+One important gap in the current research relates to the role of MT in past tense inflection.
+The study by @leongSociolinguisticFactorsAffecting2021 suggested that there was no significant effect of whether participants reported primarily speaking English or a non-English variety at home on production of inflected past forms.
+However, this approach collapsed speakers of different MTs, and therefore could not determine the effect of MT.
+In contrast, a study by @wongAcquisitionEnglishTense2012 on Malaysian learners of L2 English suggested that Malay speakers were more likely to endorse non-standard tense and agreement morphological marking than Chinese speakers, although they did not test for past tense marking.
+Further research is needed to determine whether this variation also holds for speakers of SgE with different MTs.

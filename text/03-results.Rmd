@@ -89,8 +89,8 @@ There was no main effect of MT ($b =$ `r cop_sum |> filter(term == "lang_group1"
 However, there were interaction effects between complement type and question type, as shown in Figure \@ref(fig:cop-pairwise). 
 Post-hoc pairwise comparisons using the Tukey method revealed that there were no significant pairwise contrasts for sentences including the copula (all $p >$ `r cop_con_cqt |> filter(q_type == 1) |> pull(adj.p.value) |> min() |> floor_dec(1)`). 
 However, there were significant pairwise contrasts for sentences without the copula.
-Sentences with a PP complement (`r cop_emm_cqt |> filter(q_type == 2, cop_type == 3) |> pull(estimate)` $\pm$ `r cop_emm_cqt |> filter(q_type == 2, cop_type == 3) |> pull(std.error)`) had higher ratings than sentences with an NP complement (`r cop_emm_cqt |> filter(q_type == 2, cop_type == 1) |> pull(estimate)` $\pm$ `r cop_emm_cqt |> filter(q_type == 2, cop_type == 1) |> pull(std.error)`, $b =$ `r cop_con_cqt |> filter(q_type == 2, contrast == "2 - 3") |> pull(estimate) |> abs()`, $p =$ `r cop_con_cqt |> filter(q_type == 2, contrast == "2 - 3") |> pull(adj.p.value) |> printp()`) and also had higher ratings than sentences with an AP complement (`r cop_emm_cqt |> filter(q_type == 2, cop_type == 2) |> pull(estimate)` $\pm$ `r cop_emm_cqt |> filter(q_type == 2, cop_type == 2) |> pull(std.error)`, $b =$ `r cop_con_cqt |> filter(q_type == 2, contrast == "3 - 1") |> pull(estimate) |> abs()`, $p =$ `r cop_con_cqt |> filter(q_type == 2, contrast == "3 - 1") |> pull(adj.p.value) |> printp()`). 
-Sentences with an NP complement were not significantly different than sentences with an AP complement ($b =$ `r cop_con_cqt |> filter(q_type == 2, contrast == "2 - 1") |> pull(estimate) |> abs()`, $p =$ `r cop_con_cqt |> filter(q_type == 2, contrast == "2 - 1") |> pull(adj.p.value) |> printp()`).
+Sentences with a PP complement (`r cop_emm_cqt |> filter(q_type == 2, cop_type == 3) |> pull(estimate)` $\pm$ `r cop_emm_cqt |> filter(q_type == 2, cop_type == 3) |> pull(std.error)`) had higher ratings than sentences with an NP complement (`r cop_emm_cqt |> filter(q_type == 2, cop_type == 1) |> pull(estimate)` $\pm$ `r cop_emm_cqt |> filter(q_type == 2, cop_type == 1) |> pull(std.error)`, $b =$ `r cop_con_cqt |> filter(q_type == 2, contrast == "cop_type2 - cop_type3") |> pull(estimate) |> abs()`, $p =$ `r cop_con_cqt |> filter(q_type == 2, contrast == "cop_type2 - cop_type3") |> pull(adj.p.value) |> printp()`) and also had higher ratings than sentences with an AP complement (`r cop_emm_cqt |> filter(q_type == 2, cop_type == 2) |> pull(estimate)` $\pm$ `r cop_emm_cqt |> filter(q_type == 2, cop_type == 2) |> pull(std.error)`, $b =$ `r cop_con_cqt |> filter(q_type == 2, contrast == "cop_type3 - cop_type1") |> pull(estimate) |> abs()`, $p =$ `r cop_con_cqt |> filter(q_type == 2, contrast == "cop_type3 - cop_type1") |> pull(adj.p.value) |> printp()`). 
+Ratings for sentences with an NP complement were not significantly different from sentences with an AP complement ($b =$ `r cop_con_cqt |> filter(q_type == 2, contrast == "cop_type2 - cop_type1") |> pull(estimate) |> abs()`, $p =$ `r cop_con_cqt |> filter(q_type == 2, contrast == "cop_type2 - cop_type1") |> pull(adj.p.value) |> printp()`).
 
 (ref:cop-pw) Mean ratings for copular constructions by complement type and sentence version. \*: $p < .05$, \*\*: $p < .01$.
 ```{r cop-pairwise, out.width="100%", fig.cap="(ref:cop-pw)"}
@@ -183,10 +183,10 @@ past_plot
 
 ```{r past_stats}
 past_sw <- past_lm |> compute_redres() |> shapiro.test()
-past_emm_qt <- emmeans(cop_lm, ~ q_type) |> tidy()
-past_emm_lqt <- emmeans(cop_lm, ~ lang_group | q_type)
+past_emm_qt <- emmeans(past_lm, ~ q_type) |> tidy()
+past_emm_lqt <- emmeans(past_lm, ~ lang_group | q_type)
 past_con_lqt <- contrast(past_emm_lqt, method = "pairwise") |> tidy()
-past_emm_lg <- emmeans(cop_lm, ~ lang_group) |> tidy()
+past_emm_lg <- emmeans(past_lm, ~ lang_group) |> tidy()
 ```
 
 Participants' ratings for items involving past tense constructions are shown in Figure \@ref(fig:past-plot). 
@@ -194,7 +194,7 @@ We conducted a linear regression with rating as the outcome variable, and past m
 We also included participant and item as random effects.
 The full model specification is as follows: `rating ~ past_type * sent_version * mt + (1 | ppt_id) + (1 | item_id)`.[^03-03]
 
-[^03-03]: Similar to the ratings for copular constructions, Shapiro--Wilk test revealed that residuals of the linear regression were not normally distributed ($W =$ `r past_sw$statistic`, $p < .001$). 
+[^03-03]: Similar to the ratings for copular constructions, a Shapiro--Wilk test revealed that residuals of the linear regression were not normally distributed ($W =$ `r past_sw$statistic`, $p < .001$). 
 Again, visual observation of the Q--Q plot suggested that the deviation was minor and only occurred near the top tail of the distribution, which was expected due to negative skew (`r skewness(past$value)`) associated with a ceiling effect. 
 As such, linear regression remained the analysis of choice.
 ```{r past-resqq}
@@ -260,7 +260,7 @@ past_pw
 ## Past tense marking---event aspect
 
 As past marking type was not a significant predictor of ratings for sentences involving the past tense construction, we conducted an exploratory analysis to determine whether there were other possible predictors that would explain the variation observed in participants' responses to different past tense items.
-One candidate was the aspect of the event semantics, which was noted by @hoDynamicsContactContinuum1993 to also influence the proportion of past marking.
+One candidate was the aspect of the event semantics, which was noted by @hoDynamicsContactContinuum1993 also to influence the proportion of past marking.
 Specifically, they found that verbs which were telic showed the highest proportion of past marking, followed by stative verbs, followed by atelic verbs.[^03-04] 
 To explore the role of event semantics in past tense marking, we evaluated each sentence in terms of the aspectual features of the event described: dynamic or stative, durative or punctual, and telic or atelic [@dowtyWordMeaningMontague1979; @olsenSemanticsPragmaticsLexical1994; @vendlerVerbsTimes1957].
 Using these features, we classified each sentence into aspectual classes: accomplishment ([+dynamic, +durative, +telic]), achievement ([+dynamic, $-$durative, +telic]), activity ([+dynamic, +durative, $-$telic]), or state ([$-$dynamic, +durative, $-$telic]).[^03-05] 
@@ -300,7 +300,7 @@ past_sem_hist
 Participants' ratings for past tense constructions by aspectual class are shown in Figure \@ref(fig:past-sem-plot).
 We conducted a linear regression with rating as the outcome variable, and aspectual class, sentence version, and MT as fixed effects with sum contrasts, along with all interactions. 
 We also included participant and item as random effects.
-The full model specification is as follows: `rating ~ aspectual_class * sent_version * mt + (1 | ppt_id) + (1 | item_id)`.[^03-03]
+The full model specification is as follows: `rating ~ aspectual_class * sent_version * mt + (1 | ppt_id) + (1 | item_id)`.
 
 (ref:past-sem-plot) Distributions of ratings for past tense constructions by event aspect, sentence version, and MT. Black dashed lines indicate means. C: Chinese; M: Malay.
 ```{r past-sem-plot, out.width="100%", fig.cap="(ref:past-sem-plot)"}
@@ -386,7 +386,7 @@ Model results suggested that there was again a main effect of sentence version (
 Additionally, there was an interaction effect among sentence version, MT, and event aspectual class, as shown in Figure \@ref(fig:past-sem-pairwise). 
 Post-hoc pairwise comparisons using the Tukey method revealed that there were no significant pairwise contrasts for sentences with past tense marking (all $p >$ `r past_sem_con |> filter(q_type == 1) |> pull(p.value) |> min() |> floor_dec(1)`). 
 For sentences without past tense marking, there were no significant pairwise contrasts for Malay MT speakers (all $p >$ `r past_sem_con |> filter(q_type == 2, lang_group == "M") |> pull(p.value) |> min() |> floor_dec(1)`). 
-However, for Chinese MT speakers, sentences with unmarked past activities (`r past_sem_emm_tidy |> filter(q_type == 2, lang_group == "C", aspectual_class == "activity") |> pull(estimate)` $\pm$ `r past_sem_emm_tidy |> filter(q_type == 2, lang_group == "C", aspectual_class == "activity") |> pull(std.error)`) had higher ratings than sentences with unmarked past states (`r past_sem_emm_tidy |> filter(q_type == 2, lang_group == "C", aspectual_class == "state") |> pull(estimate)` $\pm$ `r past_sem_emm_tidy |> filter(q_type == 2, lang_group == "C", aspectual_class == "state") |> pull(std.error)`, $b =$ `r past_sem_con |> filter(q_type == 2, lang_group == "C", group1 == "activity", group2 == "state") |> pull(estimate) |> abs()`, $p =$ `r past_sem_con |> filter(q_type == 2, lang_group == "C", group1 == "activity", group2 == "state") |> pull(p.value) |> printp()`). 
+However, for Chinese MT speakers, sentences that expressed unmarked past activities (`r past_sem_emm_tidy |> filter(q_type == 2, lang_group == "C", aspectual_class == "activity") |> pull(estimate)` $\pm$ `r past_sem_emm_tidy |> filter(q_type == 2, lang_group == "C", aspectual_class == "activity") |> pull(std.error)`) had higher ratings than sentences that expressed unmarked past states (`r past_sem_emm_tidy |> filter(q_type == 2, lang_group == "C", aspectual_class == "state") |> pull(estimate)` $\pm$ `r past_sem_emm_tidy |> filter(q_type == 2, lang_group == "C", aspectual_class == "state") |> pull(std.error)`, $b =$ `r past_sem_con |> filter(q_type == 2, lang_group == "C", group1 == "activity", group2 == "state") |> pull(estimate) |> abs()`, $p =$ `r past_sem_con |> filter(q_type == 2, lang_group == "C", group1 == "activity", group2 == "state") |> pull(p.value) |> printp()`). 
 
 ## Individual differences
 
@@ -428,7 +428,7 @@ both_plot
 ```
 
 The correlation in means between the two types of CSE constructions was moderate, $r =$ `r both_cor`, suggesting that participants sometimes (but not always) endorsed both types of CSE constructions with similar ratings.
-Additionally, many of the points lay above the $y = x$ line, suggesting that participants generally rated the CSE past tense constructions higher than the CSE copular constructions.
+Additionally, many of the points lay above the $y = x$ line, suggesting that participants generally rated the CSE past tense constructions higher than the CSE copular constructions; this aligns with findings from @leimgruberSingaporeEnglishStructure2013, who identified that lack of verbal inflection as being more common than zero copula.
 
 The second analysis studied the relationship between participants' ratings and their self-assessed MT language proficiency.
 A histogram of participants' MT proficiencies is shown in Figure \@ref(fig:prof-hist).
@@ -502,10 +502,10 @@ prof_int_emm <- emtrends(prof_lm, ~ q_type * lang_group, var = "proficiency_std"
 
 Participants' ratings by their self-assessed MT proficiency are shown in Figure \@ref(fig:prof-plot).
 We focus on model results specifically related to MT proficiency, as other results were similar to results reported in the previous sections.
-There was an interaction effect between sentence version and MT proficiency ($b =$ `r prof_sum |> filter(term == "q_type1:proficiency_std") |> pull(estimate)`, $p =$ `r prof_sum |> filter(term == "q_type1:proficiency_std") |> pull(p.value) |> printp()`), with the estimated marginal trend of MT proficiency being negative for SSE sentences (slope $=$ `r prof_emm |> filter(q_type == 1) |> pull(proficiency_std.trend)`) and positive for CSE sentences (slope $=$ `r prof_emm |> filter(q_type == 2) |> pull(proficiency_std.trend)`), although neither reached significance (all $p >$ `r prof_emm |> pull(p.value) |> min() |> floor_dec(1)`).
+There was an interaction effect between sentence version and MT proficiency ($b =$ `r prof_sum |> filter(term == "q_type1:proficiency_std") |> pull(estimate)`, $p =$ `r prof_sum |> filter(term == "q_type1:proficiency_std") |> pull(p.value) |> printp()`), with the estimated marginal trend of MT proficiency being negative for SSE sentences ($b =$ `r prof_emm |> filter(q_type == 1) |> pull(proficiency_std.trend)`) and positive for CSE sentences ($b =$ `r prof_emm |> filter(q_type == 2) |> pull(proficiency_std.trend)`), although neither reached significance (all $p >$ `r prof_emm |> pull(p.value) |> min() |> floor_dec(1)`).
 
 There was also an interaction effect among sentence version, MT, and MT proficiency ($b =$ `r prof_sum |> filter(term == "q_type1:lang_group1:proficiency_std") |> pull(estimate)`, $p =$ `r prof_sum |> filter(term == "q_type1:lang_group1:proficiency_std") |> pull(p.value) |> printp()`). 
-For Chinese MT speakers, the estimated marginal trend of MT proficiency was positive for both SSE (slope $=$ `r prof_int_emm |> filter(q_type == 1, lang_group == "C") |> pull(proficiency_std.trend)`) and CSE (slope $=$ `r prof_int_emm |> filter(q_type == 2, lang_group == "C") |> pull(proficiency_std.trend)`) sentences, whereas for Malay MT speakers, the estimated marginal trend of MT proficiency was negative for SSE sentences (slope $=$ `r prof_int_emm |> filter(q_type == 1, lang_group == "M") |> pull(proficiency_std.trend)`) but positive for CSE sentences (slope $=$ `r prof_int_emm |> filter(q_type == 2, lang_group == "M") |> pull(proficiency_std.trend)`).
+For Chinese MT speakers, the estimated marginal trend of MT proficiency was positive for both SSE ($b =$ `r prof_int_emm |> filter(q_type == 1, lang_group == "C") |> pull(proficiency_std.trend)`) and CSE ($b =$ `r prof_int_emm |> filter(q_type == 2, lang_group == "C") |> pull(proficiency_std.trend)`) sentences, whereas for Malay MT speakers, the estimated marginal trend of MT proficiency was negative for SSE sentences ($b =$ `r prof_int_emm |> filter(q_type == 1, lang_group == "M") |> pull(proficiency_std.trend)`) but positive for CSE sentences ($b =$ `r prof_int_emm |> filter(q_type == 2, lang_group == "M") |> pull(proficiency_std.trend)`).
 Only the negative SSE trend for Malay MT speakers reached significance ($p =$ `r prof_int_emm |> filter(q_type == 1, lang_group == "M") |> pull(p.value) |> printp()`).
 
 In summary, as MT proficiency increased, ratings for CSE sentences also increased for both Chinese and Malay speakers. 

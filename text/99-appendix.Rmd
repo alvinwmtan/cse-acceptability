@@ -1,0 +1,40 @@
+# Appendix: Questionnaire
+
+This appendix contains the full list of sentences used in the acceptability judgement task, the rating scale, as well as the demographic questions presented to participants.
+
+## Acceptability judgement items {#sec:items}
+Words in braces indicate alternations between SSE versions (before the slash) and CSE versions (after the slash) of the sentence. 
+
+```{r}
+q_items <- read_csv("data/questionnaire_items.csv")
+q_items |> 
+  gt() |> 
+  fmt_markdown(columns = Sentence) |> 
+  tab_options(table.width = pct(100)) |> 
+  cols_align(
+    align = "right",
+    columns = "No."
+  )
+```
+
+## Rating scale {#sec:scale}
+```{r}
+q_scale <- read_csv("data/questionnaire_scale.csv")
+q_scale |> 
+  gt() |> 
+  tab_options(table.width = pct(100)) |> 
+  cols_width(Description ~ pct(92))
+```
+
+## Demographic questions {#sec:demogs}
+Some of the questions required participants to select an option; in these cases, the possible options are listed in brackets.
+
+```{r}
+q_demogs <- read_csv("data/questionnaire_demogs.csv",
+                     col_types = "cc")
+q_demogs |> 
+  gt() |> 
+  tab_options(table.width = pct(100)) |> 
+  cols_width(Question ~ pct(95))
+```
+
