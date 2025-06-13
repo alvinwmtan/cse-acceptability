@@ -41,8 +41,8 @@ cop_mean <- cop |>
             sd = sd(value),
             count = n()) |> 
   mutate(se = sd / sqrt(count),
-         lower_ci = mean - se,
-         upper_ci = mean + se)
+         lower_ci = mean - 1.96*se,
+         upper_ci = mean + 1.96*se)
 
 cop_lab <- labeller(
   s_variant = c("a" = "With copula", "b" = "Without copula"), 
@@ -82,12 +82,12 @@ cop_resqq <- plot_resqq(cop_lm)
 
 Model results suggested that there was an unsurprising main effect of sentence version ($b =$ `r cop_sum |> filter(term == "q_type1") |> pull(estimate)`, $p$ `r cop_sum |> filter(term == "q_type1") |> pull(p.value) |> printp()`), with sentences including the copula having higher mean ratings (`r cop_emm_qt |> filter(q_type == 1) |> pull(estimate)` $\pm$ `r cop_emm_qt |> filter(q_type == 1) |> pull(std.error)`) than sentences without the copula (`r cop_emm_qt |> filter(q_type == 2) |> pull(estimate)` $\pm$ `r cop_emm_qt |> filter(q_type == 2) |> pull(std.error)`).[^03-02]
 
-[^03-02]: Reported values indicate estimated marginal means and their 95% confidence intervals.
+[^03-02]: Reported values indicate estimated marginal means and their standard errors.
 
 There was no main effect of MT ($b =$ `r cop_sum |> filter(term == "lang_group1") |> pull(estimate)`, $p =$ `r cop_sum |> filter(term == "lang_group1") |> pull(p.value) |> printp()`), suggesting that mean ratings did not differ between Chinese speakers (`r cop_emm_lg |> filter(lang_group == "C") |> pull(estimate)` $\pm$ `r cop_emm_lg |> filter(lang_group == "C") |> pull(std.error)`) and Malay speakers (`r cop_emm_lg |> filter(lang_group == "M") |> pull(estimate)` $\pm$ `r cop_emm_lg |> filter(lang_group == "C") |> pull(std.error)`).
 
 However, there were interaction effects between complement type and question type, as shown in Figure \@ref(fig:cop-pairwise). 
-Post-hoc pairwise comparisons using the Tukey method revealed that there were no significant pairwise contrasts for sentences including the copula (all $p >$ `r cop_con_cqt |> filter(q_type == 1) |> pull(adj.p.value) |> min() |> floor_dec(1)`). 
+Post-hoc pairwise comparisons using the Tukey method revealed that there were no significant pairwise contrasts for sentences including the copula (all $p >$ `r cop_con_cqt |> filter(q_type == 1) |> pull(adj.p.value) |> min() |> floor_dec(1) |> apa_p(2)`). 
 However, there were significant pairwise contrasts for sentences without the copula.
 Sentences with a PP complement (`r cop_emm_cqt |> filter(q_type == 2, cop_type == 3) |> pull(estimate)` $\pm$ `r cop_emm_cqt |> filter(q_type == 2, cop_type == 3) |> pull(std.error)`) had higher ratings than sentences with an NP complement (`r cop_emm_cqt |> filter(q_type == 2, cop_type == 1) |> pull(estimate)` $\pm$ `r cop_emm_cqt |> filter(q_type == 2, cop_type == 1) |> pull(std.error)`, $b =$ `r cop_con_cqt |> filter(q_type == 2, contrast == "cop_type2 - cop_type3") |> pull(estimate) |> abs()`, $p =$ `r cop_con_cqt |> filter(q_type == 2, contrast == "cop_type2 - cop_type3") |> pull(adj.p.value) |> printp()`) and also had higher ratings than sentences with an AP complement (`r cop_emm_cqt |> filter(q_type == 2, cop_type == 2) |> pull(estimate)` $\pm$ `r cop_emm_cqt |> filter(q_type == 2, cop_type == 2) |> pull(std.error)`, $b =$ `r cop_con_cqt |> filter(q_type == 2, contrast == "cop_type3 - cop_type1") |> pull(estimate) |> abs()`, $p =$ `r cop_con_cqt |> filter(q_type == 2, contrast == "cop_type3 - cop_type1") |> pull(adj.p.value) |> printp()`). 
 Ratings for sentences with an NP complement were not significantly different from sentences with an AP complement ($b =$ `r cop_con_cqt |> filter(q_type == 2, contrast == "cop_type2 - cop_type1") |> pull(estimate) |> abs()`, $p =$ `r cop_con_cqt |> filter(q_type == 2, contrast == "cop_type2 - cop_type1") |> pull(adj.p.value) |> printp()`).
@@ -134,7 +134,7 @@ cop_pw
 ```
 
 Surprisingly, there were no interaction effects involving MT. 
-There was no interaction between language and complement type ($p >$ `r cop_sum |> filter(grepl("cop_type[12]:lang_group1$", term)) |> pull(p.value) |> min() |> floor_dec(1)`), or language and sentence version ($p =$ `r cop_sum |> filter(term == "q_type1:lang_group1") |> pull(p.value) |> printp()`), or language and both complement type and sentence version ($p >$ `r cop_sum |> filter(grepl("cop_type[12]:q_type1:lang_group1$", term)) |> pull(p.value) |> min() |> floor_dec(1)`).
+There was no interaction between language and complement type ($p >$ `r cop_sum |> filter(grepl("cop_type[12]:lang_group1$", term)) |> pull(p.value) |> min() |> floor_dec(1) |> apa_p(2)`), or language and sentence version ($p =$ `r cop_sum |> filter(term == "q_type1:lang_group1") |> pull(p.value) |> printp()`), or language and both complement type and sentence version ($p >$ `r cop_sum |> filter(grepl("cop_type[12]:q_type1:lang_group1$", term)) |> pull(p.value) |> min() |> floor_dec(1) |> apa_p(2)`).
 
 ## Past tense marking---past marking type
 
@@ -162,8 +162,8 @@ past_mean <- past |>
             sd = sd(value),
             count = n()) |> 
   mutate(se = sd / sqrt(count),
-         lower_ci = mean - se,
-         upper_ci = mean + se)
+         lower_ci = mean - 1.96*se,
+         upper_ci = mean + 1.96*se)
 
 past_lab <- labeller(
   s_variant = c("a" = "With past marking", "b" = "Without past marking"), 
@@ -205,11 +205,11 @@ Model results suggested that there was again a main effect of sentence version (
 
 There was again no main effect of MT ($b =$ `r past_sum |> filter(term == "lang_group1") |> pull(estimate)`, $p =$ `r past_sum |> filter(term == "lang_group1") |> pull(p.value) |> printp()`), suggesting that mean ratings did not differ between Chinese speakers (`r past_emm_lg |> filter(lang_group == "C") |> pull(estimate)` $\pm$ `r past_emm_lg |> filter(lang_group == "C") |> pull(std.error)`) and Malay speakers (`r past_emm_lg |> filter(lang_group == "M") |> pull(estimate)` $\pm$ `r past_emm_lg |> filter(lang_group == "C") |> pull(std.error)`).
 
-In contrast with the pattern of results for copular constructions, there were no significant interaction effects between past marking type and sentence version (all $p >$ `r past_sum |> filter(grepl("past_type[1-4]:q_type1$", term)) |> pull(p.value) |> min() |> floor_dec(2)`).
-There were also no significant interaction effects between past marking type and both question type and MT (all $p >$ `r past_sum |> filter(grepl("past_type[1-4]:q_type1:", term)) |> pull(p.value) |> min() |> floor_dec(2)`).
+In contrast with the pattern of results for copular constructions, there were no significant interaction effects between past marking type and sentence version (all $p >$ `r past_sum |> filter(grepl("past_type[1-4]:q_type1$", term)) |> pull(p.value) |> min() |> floor_dec(2) |> apa_p(2)`).
+There were also no significant interaction effects between past marking type and both question type and MT (all $p >$ `r past_sum |> filter(grepl("past_type[1-4]:q_type1:", term)) |> pull(p.value) |> min() |> floor_dec(2) |> apa_p(2)`).
 
 Conversely, there was a significant interaction effect between sentence version and MT ($b =$ `r past_sum |> filter(term == "q_type1:lang_group1") |> pull(estimate)`, $p =$ `r past_sum |> filter(term == "q_type1:lang_group1") |> pull(p.value) |> printp()`), as shown in Figure \@ref(fig:past-pw). 
-Post-hoc pairwise comparisons using the Tukey method did not reveal any simple effects of MT (all $p >$ `r past_con_lqt |> pull(p.value) |> min() |> floor_dec(1)`), suggesting that Chinese and Malay speakers did not differ in their ratings for either sentence version, although they differed in the _difference_ in ratings between sentences with and without past tense marking. 
+Post-hoc pairwise comparisons using the Tukey method did not reveal any simple effects of MT (all $p >$ `r past_con_lqt |> pull(p.value) |> min() |> floor_dec(2) |> apa_p(2)`), suggesting that Chinese and Malay speakers did not differ in their ratings for either sentence version, although they differed in the _difference_ in ratings between sentences with and without past tense marking. 
 
 (ref:past-pw) Mean ratings for past tense constructions by MT and sentence version. C: Chinese; M: Malay.
 ```{r past-pw, out.width="100%", fig.cap="(ref:past-pw)"}
@@ -219,8 +219,8 @@ past_mean <- past |>
             sd = sd(value),
             count = n()) |> 
   mutate(se = sd / sqrt(count),
-         lower_ci = mean - se,
-         upper_ci = mean + se)
+         lower_ci = mean - 1.96*se,
+         upper_ci = mean + 1.96*se)
 
 past_lm <- lmer(value ~ q_type * lang_group + 
                     (1 | ResponseId) + (1 | s_label),
@@ -310,8 +310,8 @@ past_sem_mean <- past_sem |>
             sd = sd(value),
             count = n()) |> 
   mutate(se = sd / sqrt(count),
-         lower_ci = mean - se,
-         upper_ci = mean + se)
+         lower_ci = mean - 1.96*se,
+         upper_ci = mean + 1.96*se)
 
 past_sem_prop <- past_sem |> 
   group_by(aspectual_class, s_variant, lang_group) |> 
@@ -357,8 +357,8 @@ past_sem_mean_2 <- past_sem |>
             sd = sd(value),
             count = n()) |> 
   mutate(se = sd / sqrt(count),
-         lower_ci = mean - se,
-         upper_ci = mean + se)
+         lower_ci = mean - 1.96*se,
+         upper_ci = mean + 1.96*se)
 
 past_sem_pw <- ggplot(data = past_sem_mean_2) +
   geom_col(aes(y = mean, x = aspectual_class, fill = s_variant),
@@ -384,14 +384,14 @@ past_sem_pw
 
 Model results suggested that there was again a main effect of sentence version ($b =$ `r past_sem_sum |> filter(term == "q_type1") |> pull(estimate)`, $p$ `r past_sem_sum |> filter(term == "q_type1") |> pull(p.value) |> printp()`), and an interaction effect between sentence version and MT ($b =$ `r past_sem_sum |> filter(term == "q_type1:lang_group1") |> pull(estimate)`, $p =$ `r past_sem_sum |> filter(term == "q_type1:lang_group1") |> pull(p.value) |> printp()`).
 Additionally, there was an interaction effect among sentence version, MT, and event aspectual class, as shown in Figure \@ref(fig:past-sem-pairwise). 
-Post-hoc pairwise comparisons using the Tukey method revealed that there were no significant pairwise contrasts for sentences with past tense marking (all $p >$ `r past_sem_con |> filter(q_type == 1) |> pull(p.value) |> min() |> floor_dec(1)`). 
-For sentences without past tense marking, there were no significant pairwise contrasts for Malay MT speakers (all $p >$ `r past_sem_con |> filter(q_type == 2, lang_group == "M") |> pull(p.value) |> min() |> floor_dec(1)`). 
+Post-hoc pairwise comparisons using the Tukey method revealed that there were no significant pairwise contrasts for sentences with past tense marking (all $p >$ `r past_sem_con |> filter(q_type == 1) |> pull(p.value) |> min() |> floor_dec(1) |> apa_p(2)`). 
+For sentences without past tense marking, there were no significant pairwise contrasts for Malay MT speakers (all $p >$ `r past_sem_con |> filter(q_type == 2, lang_group == "M") |> pull(p.value) |> min() |> floor_dec(1) |> apa_p(2)`). 
 However, for Chinese MT speakers, sentences that expressed unmarked past activities (`r past_sem_emm_tidy |> filter(q_type == 2, lang_group == "C", aspectual_class == "activity") |> pull(estimate)` $\pm$ `r past_sem_emm_tidy |> filter(q_type == 2, lang_group == "C", aspectual_class == "activity") |> pull(std.error)`) had higher ratings than sentences that expressed unmarked past states (`r past_sem_emm_tidy |> filter(q_type == 2, lang_group == "C", aspectual_class == "state") |> pull(estimate)` $\pm$ `r past_sem_emm_tidy |> filter(q_type == 2, lang_group == "C", aspectual_class == "state") |> pull(std.error)`, $b =$ `r past_sem_con |> filter(q_type == 2, lang_group == "C", group1 == "activity", group2 == "state") |> pull(estimate) |> abs()`, $p =$ `r past_sem_con |> filter(q_type == 2, lang_group == "C", group1 == "activity", group2 == "state") |> pull(p.value) |> printp()`). 
 
 ## Individual differences
 
 To better understand the observed variation in responses, we conducted two further exploratory analyses.
-The first analysis involved understanding the relationship in participants' responses to the two types of constructions studied: were participants who rated CSE copular constructions more highly also more likely to rate CSE past tense constructions more highly?
+The first analysis involved understanding the relationship in participants' responses to the two types of constructions studied: Were participants who rated CSE copular constructions more highly also more likely to rate CSE past tense constructions more highly?
 We calculated the mean and 95% confidence intervals for both types of CSE constructions for each participant, shown in Figure \@ref(fig:cor).
 
 (ref:cor) Ratings for copula and past tense CSE constructions by participant. Error bars indicate 95% confidence intervals. Blue line and shaded area indicate the line of best fit and 95% confidence intervals.
@@ -413,11 +413,11 @@ both_cor <- cor(both$avg_rating_1, both$avg_rating_2)
 both_plot <- ggplot(both,
                     aes(x = avg_rating_1, y = avg_rating_2)) +
   geom_point() +
-  geom_errorbar(aes(ymin = avg_rating_2 - 0.95*se_rating_2, 
-                    ymax = avg_rating_2 + 0.95*se_rating_2),
+  geom_errorbar(aes(ymin = avg_rating_2 - 1.96*se_rating_2, 
+                    ymax = avg_rating_2 + 1.96*se_rating_2),
                 alpha = .5) +
-  geom_errorbar(aes(xmin = avg_rating_1 - 0.95*se_rating_1, 
-                    xmax = avg_rating_1 + 0.95*se_rating_1),
+  geom_errorbar(aes(xmin = avg_rating_1 - 1.96*se_rating_1, 
+                    xmax = avg_rating_1 + 1.96*se_rating_1),
                 alpha = .5) +
   geom_smooth(method = "lm") +
   geom_abline(slope = 1, intercept = 0, lty = "dashed") +
@@ -427,8 +427,8 @@ both_plot <- ggplot(both,
 both_plot
 ```
 
-The correlation in means between the two types of CSE constructions was moderate, $r =$ `r both_cor`, suggesting that participants sometimes (but not always) endorsed both types of CSE constructions with similar ratings.
-Additionally, many of the points lay above the $y = x$ line, suggesting that participants generally rated the CSE past tense constructions higher than the CSE copular constructions; this aligns with findings from @leimgruberSingaporeEnglishStructure2013, who identified that lack of verbal inflection as being more common than zero copula.
+The correlation in means between the two types of CSE constructions was moderate, $r =$ `r both_cor |> apa_p(2)`, suggesting that participants sometimes (but not always) endorsed both types of CSE constructions with similar ratings.
+Additionally, many of the points lay above the $y = x$ line, suggesting that participants generally rated the CSE past tense constructions higher than the CSE copular constructions; this aligns with findings from @leimgruberSingaporeEnglishStructure2013, who identified lack of verbal inflection as being more common than zero copula.
 
 The second analysis studied the relationship between participants' ratings and their self-assessed MT language proficiency.
 A histogram of participants' MT proficiencies is shown in Figure \@ref(fig:prof-hist).
@@ -502,9 +502,9 @@ prof_int_emm <- emtrends(prof_lm, ~ q_type * lang_group, var = "proficiency_std"
 
 Participants' ratings by their self-assessed MT proficiency are shown in Figure \@ref(fig:prof-plot).
 We focus on model results specifically related to MT proficiency, as other results were similar to results reported in the previous sections.
-There was an interaction effect between sentence version and MT proficiency ($b =$ `r prof_sum |> filter(term == "q_type1:proficiency_std") |> pull(estimate)`, $p =$ `r prof_sum |> filter(term == "q_type1:proficiency_std") |> pull(p.value) |> printp()`), with the estimated marginal trend of MT proficiency being negative for SSE sentences ($b =$ `r prof_emm |> filter(q_type == 1) |> pull(proficiency_std.trend)`) and positive for CSE sentences ($b =$ `r prof_emm |> filter(q_type == 2) |> pull(proficiency_std.trend)`), although neither reached significance (all $p >$ `r prof_emm |> pull(p.value) |> min() |> floor_dec(1)`).
+There was an interaction effect between sentence version and MT proficiency ($b =$ `r prof_sum |> filter(term == "q_type1:proficiency_std") |> pull(estimate)`, $p$ `r prof_sum |> filter(term == "q_type1:proficiency_std") |> pull(p.value) |> printp()`), with the estimated marginal trend of MT proficiency being negative for SSE sentences ($b =$ `r prof_emm |> filter(q_type == 1) |> pull(proficiency_std.trend)`) and positive for CSE sentences ($b =$ `r prof_emm |> filter(q_type == 2) |> pull(proficiency_std.trend)`), although neither reached significance (all $p >$ `r prof_emm |> pull(p.value) |> min() |> floor_dec(1)|> apa_p(2)`).
 
-There was also an interaction effect among sentence version, MT, and MT proficiency ($b =$ `r prof_sum |> filter(term == "q_type1:lang_group1:proficiency_std") |> pull(estimate)`, $p =$ `r prof_sum |> filter(term == "q_type1:lang_group1:proficiency_std") |> pull(p.value) |> printp()`). 
+There was also an interaction effect among sentence version, MT, and MT proficiency ($b =$ `r prof_sum |> filter(term == "q_type1:lang_group1:proficiency_std") |> pull(estimate)`, $p$ `r prof_sum |> filter(term == "q_type1:lang_group1:proficiency_std") |> pull(p.value) |> printp()`). 
 For Chinese MT speakers, the estimated marginal trend of MT proficiency was positive for both SSE ($b =$ `r prof_int_emm |> filter(q_type == 1, lang_group == "C") |> pull(proficiency_std.trend)`) and CSE ($b =$ `r prof_int_emm |> filter(q_type == 2, lang_group == "C") |> pull(proficiency_std.trend)`) sentences, whereas for Malay MT speakers, the estimated marginal trend of MT proficiency was negative for SSE sentences ($b =$ `r prof_int_emm |> filter(q_type == 1, lang_group == "M") |> pull(proficiency_std.trend)`) but positive for CSE sentences ($b =$ `r prof_int_emm |> filter(q_type == 2, lang_group == "M") |> pull(proficiency_std.trend)`).
 Only the negative SSE trend for Malay MT speakers reached significance ($p =$ `r prof_int_emm |> filter(q_type == 1, lang_group == "M") |> pull(p.value) |> printp()`).
 

@@ -1,13 +1,23 @@
 # Methods
 
 ## Participants
+```{r uni_prop, warning=F}
+data_df <- read_csv(here("data", "data.csv")) #, locale = locale(encoding = "UTF-16LE"))
+uni_prop <- data_df |> 
+  mutate(uni = ifelse(!is.na(Q15) & Q15 != "Na", "Y", "N")) |> 
+  select(uni, lang_group) |> 
+  filter(lang_group %in% c("C", "M")) |> 
+  table()
+uni_chisq <- chisq.test(uni_prop, correct = FALSE)
+```
+
 83 participants aged 18--25 (49 male, 33 female, 1 other) participated in the main study. 
 All participants were native CSE speakers. 
 As their MT, 62 spoke Chinese, 18 spoke Malay, and 3 spoke another language (English or Tamil). 
 Only the Chinese- and Malay-speaking participants were used for the remainder of the analyses.
 
-Out of the 80 included participants, 73 either attended, were attending, or were about to attend university, of whom 58 were Chinese-speaking and 14 were Malay-speaking. 
-These proportions were not significantly different at $\alpha = .01$ ($\chi^2 = 3.855$, $p = .050$). 
+Out of the 80 included participants, 73 either attended, were attending, or were about to attend university, of whom 58 were Chinese-speaking and 15 were Malay-speaking. 
+These proportions were not significantly different at $\alpha = .05$ ($\chi^2 = $ `r uni_chisq$statistic |> round(2)`, $p = $ `r uni_chisq$p.value |> apa_p()`). 
 Both the MT and education level distributions were similar to those of the overall 18--25 population in Singapore [@departmentofstatisticsministryoftradeandindustryrepublicofsingaporeSingaporeCensusPopulation2021].
 
 40 participants indicated that they could speak at least one variety other than English and their MT. 
@@ -21,12 +31,12 @@ They were told not to consider grammar rules they may have learnt in school, but
 Participants were also reminded that they would not be evaluated on the basis of their responses.
 
 The first block comprised 10 practice sentences, including 5 sentences in SSE and 5 in CSE. 
-This allowed participants to become familiar with the task, but also primed them to interpret sentences in a CSE context.
+This block allowed participants to become familiar with the task, and also primed them to interpret sentences in a CSE context.
 
 Subsequently, participants completed three blocks of 24 questions each. 
 Each block contained 12 copula test sentences, 10 past tense test sentences, and 2 benchmark sentences.[^02-01] 
-In particular, the 12 copula test sentences included 4 sentences for each complement type (NP, AP, PP); these all involved a 3\textsc{sg} subject to control for the form of the copula (i.e. \textit{is}). 
-The 10 past tense test sentences included 2 sentences of each past tense type (suppletion, vowel change, [t]/[d] affixation, [ɪd] affixation, vowel change + [t]/[d] appending); they also all included a past temporal marker (e.g. _yesterday_), providing a temporal discourse frame that would both signal that the event took place in the past, and license uninflected past forms [@gutTenseMarkingSingapore2009; @hoTenseMarkingSingapore2003].
+In particular, the 12 copula test sentences included 4 sentences for each complement type (NP, AP, PP); these all involved a 3\textsc{sg} subject to control for the form of the copula (i.e., _is_). 
+The 10 past tense test sentences included 2 sentences of each past tense type (suppletion, vowel change, [t]/[d] affixation, [ɪd] affixation, vowel change + [t]/[d] appending); they also all included a past temporal marker (e.g., _yesterday_), providing a temporal discourse frame that would both signal that the event took place in the past, and license uninflected past forms [@gutTenseMarkingSingapore2009; @hoTenseMarkingSingapore2003].
 The test sentences had both SSE and CSE versions (i.e., with and without the copula, or with and without past tense marking respectively), such that each participant would be presented with only one version of each test sentence.
 Participants rated an equal number of SSE and CSE sentences.
 Which sentences were presented in CSE was counterbalanced across participants. 
@@ -39,5 +49,4 @@ No participant reported identifying both classes of test sentences, suggesting t
 After completing the three test blocks, participants responded to a set of demographic questions, including information about age, gender, education, MT language proficiency, and duration of living in Singapore. 
 The full list of demographic questions can be found in the Appendix<!-- \@ref(sec:demogs)-->.
 
-The study was approved by the University of Oxford Central University Research Ethics Committee (reference number R65019/RE001).
 All participants gave informed consent before taking part in the study.

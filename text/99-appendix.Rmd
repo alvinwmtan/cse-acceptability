@@ -3,38 +3,48 @@
 This appendix contains the full list of sentences used in the acceptability judgement task, the rating scale, as well as the demographic questions presented to participants.
 
 ## Acceptability judgement items {#sec:items}
-Words in braces indicate alternations between SSE versions (before the slash) and CSE versions (after the slash) of the sentence. 
+The items used in the acceptability judgement task are shown in Table \@ref(tab:qn-acc).
+Words in braces indicate alternations between SSE versions (before the slash) and CSE versions (after the slash) of the sentence.
 
-```{r}
+```{r qn-acc}
 q_items <- read_csv("data/questionnaire_items.csv")
 q_items |> 
-  gt() |> 
+  gt(caption = "Items for acceptability judgement task.") |> 
   fmt_markdown(columns = Sentence) |> 
-  tab_options(table.width = pct(100)) |> 
+  tab_options(table.width = pct(100),
+              latex.use_longtable = TRUE) |> 
   cols_align(
     align = "right",
     columns = "No."
   )
 ```
 
+\newpage
+
 ## Rating scale {#sec:scale}
-```{r}
+The scale that participants were asked to use for ratings is shown in Table \@ref(tab:qn-scale).
+```{r qn-scale}
 q_scale <- read_csv("data/questionnaire_scale.csv")
 q_scale |> 
-  gt() |> 
-  tab_options(table.width = pct(100)) |> 
+  gt(caption = "Rating scale for acceptability judgement task.") |> 
+  tab_options(table.width = pct(100),
+              latex.use_longtable = TRUE) |> 
   cols_width(Description ~ pct(92))
 ```
 
+\newpage 
+
 ## Demographic questions {#sec:demogs}
+The demographic questions presented to participants are shown in Table \@ref(tab:qn-demog).
 Some of the questions required participants to select an option; in these cases, the possible options are listed in brackets.
 
-```{r}
+```{r qn-demog}
 q_demogs <- read_csv("data/questionnaire_demogs.csv",
                      col_types = "cc")
 q_demogs |> 
-  gt() |> 
-  tab_options(table.width = pct(100)) |> 
+  gt(caption = "Demographic questions.") |> 
+  tab_options(table.width = pct(100),
+              latex.use_longtable = TRUE) |> 
   cols_width(Question ~ pct(95))
 ```
 
